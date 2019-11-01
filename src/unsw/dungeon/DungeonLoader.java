@@ -51,6 +51,10 @@ public abstract class DungeonLoader {
         switch (type) {
         case "player":
             Player player = new Player(dungeon, x, y);
+            // add observers here
+            ItemPickUpHandler o1 = new ItemPickUpHandler(dungeon);
+            player.attach(o1);
+
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
@@ -70,8 +74,12 @@ public abstract class DungeonLoader {
             break;
             
         case "key": 
-        	// TODO Handle key entity
+        	int id = json.getInt("id");
+        	Key key = new Key(x, y, id);
+        	onLoad(key);
+        	entity = key;
         	break; 
+        	
         case "treasure":
         	// TODO Handle treasure entity
         	break; 
@@ -95,4 +103,6 @@ public abstract class DungeonLoader {
     // TODO Create additional abstract methods for the other entities
 
     public abstract void onLoad(Exit exit);
+    
+    public abstract void onLoad(Key key);
 }

@@ -34,6 +34,9 @@ public class Dungeon {
         entities.add(entity);
     }
     
+//    public ArrayList<Entity> getEntities() {
+//    	return (ArrayList<Entity>) this.entities;
+//    }
     /**
      * Searches entities in the dungeon by name and returns each one in an arrayList. If no entities 
      * found, returns empty list. 
@@ -100,6 +103,18 @@ public class Dungeon {
     		return false;
     	return getEntity(x, y).obstructsMovement();
     }
+
+    public void removeEntity(int x, int y) {
+    	if(getEntity(x, y) != null) {
+    		entities.remove(getEntity(x, y));
+    	}
+    }
+    
+//	public Entity popEntity(int x, int y) {
+//		Entity e = getEntity(x, y);
+//		removeEntity(x, y);
+//		return e;
+//	}
 
 
 
