@@ -93,7 +93,7 @@ class PlayerTest {
 		this.dungeon.addEntity(wall);
 		wall = new Wall(1, 1);
 		this.dungeon.addEntity(wall);
-		Door door = door(1, 0);
+		Door door = door(1, 0, 1);
 		this.dungeon.addEntity(door);
 		player.moveRight();
 		assertTrue(player.getX() == 0);
@@ -109,9 +109,9 @@ class PlayerTest {
 		this.dungeon.addEntity(wall);
 		wall = new Wall(1, 1);
 		this.dungeon.addEntity(wall);
-		Key key= new Key(1, 0);
+		Key key= new Key(1, 0, 1);
 		this.dungeon.addEntity(key);
-		Door door = door(2, 0);
+		Door door = door(2, 0, 1);
 		this.dungeon.addEntity(door);
 		player.moveRight();
 		player.moveRight();

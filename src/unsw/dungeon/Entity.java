@@ -15,8 +15,9 @@ public class Entity {
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private IntegerProperty x, y;
-    private boolean obstructsMovement; 
-
+    private boolean obstructsMovement = false; 
+    private boolean pickupable = false;
+    
     /**
      * Create an entity positioned in square (x,y)
      * @param x
@@ -35,9 +36,6 @@ public class Entity {
         return y;
     }
 
-    
-    
-    
     /**
      * Getters & Setters
      * @return
@@ -57,5 +55,13 @@ public class Entity {
     public void setObstructsMovement(boolean value) {
     	this.obstructsMovement = value; 
     }
+
+	public boolean isPickupable() {
+		return pickupable;
+	}
+
+	public void setPickupable(boolean value) {
+		this.pickupable = value;
+	}
     
 }
