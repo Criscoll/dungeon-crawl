@@ -27,7 +27,49 @@ public class Dungeon {
         this.entities = new ArrayList<>();
         this.player = null;
     }
+    
+    
+    public void addEntity(Entity entity) {
+        entities.add(entity);
+    }
+    
+    /**
+     * Searches entities in the dungeon by name and returns each one in an arrayList. If no entities 
+     * found, returns empty list. 
+     * @param name
+     * @return
+     */
+    public List<Entity> getEntity(String name) {
+    	List<Entity> entityList = new ArrayList<>(); 
+    	for (Entity i : this.entities) {
+    		if (i != null) {
+    			if (i.getType().equals(name)) 
+    				entityList.add(i); 
+    		}
+    			
+    	}
+    	return entityList; 
+    }
+    
+    
+    /**
+     * Returns all the entities in the current dungeon. Ensures no null entities are returned in the list. 
+     * @return
+     */
+    public List<Entity> getEntities() {
+    	List<Entity> entityList = new ArrayList<>(); 
+    	for (Entity i : this.entities) {
+    		if (i != null) 
+    			entityList.add(i); 
+    	}
+    	return entityList; 
+    }
 
+
+    /**
+     * Getters & Setters
+     * @return
+     */
     public int getWidth() {
         return width;
     }
@@ -39,12 +81,10 @@ public class Dungeon {
     public Player getPlayer() {
         return player;
     }
-
+    
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-    public void addEntity(Entity entity) {
-        entities.add(entity);
-    }
+
 }
