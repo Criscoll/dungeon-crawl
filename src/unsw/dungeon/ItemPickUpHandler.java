@@ -9,15 +9,18 @@ public class ItemPickUpHandler implements MovementObserver{
 	}
 
 	@Override
-	public void update(int x, int y) {
+	public void update(int x, int y, Player player) {
 		Entity e = dungeon.getEntity(x, y);
 		if(e == null) return;
 		if(e.isPickupable()) {
-//			e = dungeon.popEntity(x, y);
-			dungeon.removeEntity(x, y);
-//			e.x().set(-1);
-//			e.y().set(-1);
-			dungeon.getPlayer().getInventory().add(e);
+//			can only pick a key up if no key in the inventory
+			if(e instanceof Key && player.getKey() == null) {
+//				e = dungeon.popEntity(x, y);
+				dungeon.removeEntity(x, y);
+//				e.x().set(-1);
+//				e.y().set(-1);
+				player.getInventory().add(e);		
+			}
 		}
 	}
 

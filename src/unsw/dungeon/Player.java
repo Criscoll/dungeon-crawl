@@ -26,29 +26,29 @@ public class Player extends Entity {
     }
 
     public void moveUp() {
-    	if (dungeon.isObstructed(getX(), getY() - 1)) return;
     	notifyObservers(getX(), getY() - 1);
+    	if (dungeon.isObstructed(getX(), getY() - 1)) return;
         if (getY() > 0)
             y().set(getY() - 1);
     }
 
     public void moveDown() {
-    	if (dungeon.isObstructed(getX(), getY() + 1)) return;
     	notifyObservers(getX(), getY() + 1);
+    	if (dungeon.isObstructed(getX(), getY() + 1)) return;
         if (getY() < dungeon.getHeight() - 1)
             y().set(getY() + 1);
     }
 
     public void moveLeft() {
-    	if (dungeon.isObstructed(getX() - 1, getY())) return;
     	notifyObservers(getX() - 1, getY());
+    	if (dungeon.isObstructed(getX() - 1, getY())) return;
         if (getX() > 0)
             x().set(getX() - 1);
     }
 
     public void moveRight() {
-    	if (dungeon.isObstructed(getX() + 1, getY())) return;
     	notifyObservers(getX() + 1, getY());
+    	if (dungeon.isObstructed(getX() + 1, getY())) return;
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
     }
@@ -59,7 +59,7 @@ public class Player extends Entity {
      */
     public void notifyObservers(int x, int y) {
 		for(MovementObserver o : observers) {
-			o.update(x, y);
+			o.update(x, y, this);
 		}
 	}
 
@@ -75,5 +75,13 @@ public class Player extends Entity {
 	public ArrayList<Entity> getInventory() {
 		return this.inventory;
 	}
-	
+
+	public Key getKey() {
+		for(Entity e : getInventory()) {
+			if(e instanceof Key) {
+				return (Key) e;
+			}
+		}
+		return null;
+	}
 }

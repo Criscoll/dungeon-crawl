@@ -16,6 +16,10 @@ class PlayerTest {
 	void setUp() throws Exception {
 		this.dungeon = new Dungeon(height, width);
 		player = new Player(dungeon, 0, 0);
+		ItemPickUpHandler o1 = new ItemPickUpHandler(this.dungeon);
+		player.attach(o1);
+		doorOpenHandler o2 = new doorOpenHandler(this.dungeon);
+		player.attach(o2);
 		dungeon.setPlayer(player);
 	}
 
@@ -56,67 +60,74 @@ class PlayerTest {
 		wall = new Wall(1, 0);
 		this.dungeon.addEntity(wall);
 		player.moveDown();
-		assertTrue(player.getX() == 0);
-		assertTrue(player.getY() == 0);
+		assertEquals(player.getX(), 0);
+		assertEquals(player.getY(), 0);
 	}
-
+	
+	/**
+	 * player's movement should be blocked by closed door
+	 * 2. If player does not have the corresponding key, 
+	 *    then the door will block the movement of the player and will not be unlocked	
+	 */
+	@Test
+	void testClosedDoor() {
+		Key key= new Key(1, 0, 1);
+		this.dungeon.addEntity(key);
+		Door door = new Door(2, 0, 2);
+		this.dungeon.addEntity(door);
+		player.moveRight();
+		player.moveRight();
+		assertEquals(player.getX(), 1);
+		assertEquals(player.getY(), 0);
+	}
+	
+	/**
+	 * player's movement should not be blocked by a open door
+	 * 1. The door should be opened automatically when player tried to move 
+	 * 	  into the square with the door if player has the corresponding key
+	 * 3. When the door is opened, the key that was used to open the door will be consumed
+	 * 4. The door will remain open once it is unlocked
+	 */
+	@Test
+	void testOpenedDoor() {
+		Key key= new Key(1, 0, 1);
+		this.dungeon.addEntity(key);
+		Door door = new Door(2, 0, 1);
+		this.dungeon.addEntity(door);
+		player.moveRight();
+		player.moveRight();
+		assertEquals(player.getX(), 2);
+		assertEquals(player.getY(), 0);
+		assertTrue(player.getKey() == null);
+		
+		player.moveRight();
+		player.moveLeft();
+		assertEquals(player.getX(), 2);
+		assertEquals(player.getY(), 0);
+		
+	}
+	
 	/**
 	 * player's movement should be blocked by a boulder and a wall
 	 * and the boulder can be pushed to next square if there is no wall 
 	 * and player should be in the previous square the boulder at
 	 */
-	@Test
-	void testBoulder() {
-		Wall wall = new Wall(2, 0);
-		this.dungeon.addEntity(wall);
-		Boulder boulder = new Boulder(1, 0);
-		this.dungeon.addEntity(boulder);
-		boulder = new Boulder(0, 1);
-		this.dungeon.addEntity(boulder);
-		player.moveRight();
-		assertTrue(player.getX() == 0);
-		assertTrue(player.getY() == 0);
-		player.moveDown();
-		assertTrue(player.getX() == 0);
-		assertTrue(player.getY() == 1);
-		assertTrue(boulder.getX() == 0);
-		assertTrue(boulder.getY() == 2);
-	}
-	
-	
-	/**
-	 * player's movement should be blocked by closed door
-	 */
-	@Test
-	void testClosedDoor() {
-		Wall wall = new Wall(0, 1);
-		this.dungeon.addEntity(wall);
-		wall = new Wall(1, 1);
-		this.dungeon.addEntity(wall);
-		Door door = door(1, 0, 1);
-		this.dungeon.addEntity(door);
-		player.moveRight();
-		assertTrue(player.getX() == 0);
-		assertTrue(player.getY() == 0);
-	}
-	
-	/**
-	 * player's movement should not be blocked by a open door
-	 */
-	@Test
-	void testOpenedDoor() {
-		Wall wall = new Wall(0, 1);
-		this.dungeon.addEntity(wall);
-		wall = new Wall(1, 1);
-		this.dungeon.addEntity(wall);
-		Key key= new Key(1, 0, 1);
-		this.dungeon.addEntity(key);
-		Door door = door(2, 0, 1);
-		this.dungeon.addEntity(door);
-		player.moveRight();
-		player.moveRight();
-		assertTrue(player.getX() == 2);
-		assertTrue(player.getY() == 0);
-	}
+//	@Test
+//	void testBoulder() {
+//		Wall wall = new Wall(2, 0);
+//		this.dungeon.addEntity(wall);
+//		Boulder boulder = new Boulder(1, 0);
+//		this.dungeon.addEntity(boulder);
+//		boulder = new Boulder(0, 1);
+//		this.dungeon.addEntity(boulder);
+//		player.moveRight();
+//		assertTrue(player.getX() == 0);
+//		assertTrue(player.getY() == 0);
+//		player.moveDown();
+//		assertTrue(player.getX() == 0);
+//		assertTrue(player.getY() == 1);
+//		assertTrue(boulder.getX() == 0);
+//		assertTrue(boulder.getY() == 2);
+//	}
 	
 }

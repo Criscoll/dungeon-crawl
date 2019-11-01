@@ -33,6 +33,11 @@ class ItemPickUpTest {
 		this.dungeon.addEntity(key);
 		player.moveRight();
 		assertTrue(this.dungeon.getEntity(1, 0) == null);
+		key = new Key(2, 0, 2);
+		this.dungeon.addEntity(key);
+		player.moveRight();
+		assertTrue(this.dungeon.getEntity(2, 0) instanceof Key);
+		
 	}
 
 }
