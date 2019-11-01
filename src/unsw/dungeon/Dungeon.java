@@ -39,18 +39,18 @@ public class Dungeon {
      * @param name
      * @return
      */
-    public List<Entity> getEntity(String name) {
-    	List<Entity> entityList = new ArrayList<>(); 
-    	for (Entity i : this.entities) {
-    		if (i != null) {
-    			if (i.getType().equals(name)) 
-    				entityList.add(i); 
-    		}
-    			
-    	}
-    	return entityList; 
-    }
-    
+//    public List<Entity> getEntity(String name) {
+//    	List<Entity> entityList = new ArrayList<>(); 
+//    	for (Entity i : this.entities) {
+//    		if (i != null) {
+//    			if (i.getType().equals(name)) 
+//    				entityList.add(i); 
+//    		}
+//    			
+//    	}
+//    	return entityList; 
+//    }
+//    
     
     /**
      * Returns all the entities in the current dungeon. Ensures no null entities are returned in the list. 

@@ -16,7 +16,7 @@ class PlayerTest {
 	void setUp() throws Exception {
 		this.dungeon = new Dungeon(height, width);
 		player = new Player(dungeon, 0, 0);
-		dungeon.setPlayer(player);W
+		dungeon.setPlayer(player);
 	}
 
 	@AfterEach

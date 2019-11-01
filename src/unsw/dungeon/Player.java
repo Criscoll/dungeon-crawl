@@ -15,7 +15,7 @@ public class Player extends Entity {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y, "player");
+        super(x, y);
         this.dungeon = dungeon;
     }
 

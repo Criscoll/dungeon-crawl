@@ -14,7 +14,6 @@ public class Entity {
 
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
-	private String type;
     private IntegerProperty x, y;
     private boolean obstructsMovement; 
 
@@ -23,14 +22,9 @@ public class Entity {
      * @param x
      * @param y
      */
-    public Entity(int x, int y, String type) {
+    public Entity(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
-        this.type = type; 
-        
-        String[] obstructingEntities = {"wall", "enemy", "door", "exit", "boulder"};       
-        this.obstructsMovement = Arrays.asList(obstructingEntities).contains(type) ? true : false; 
-        
+        this.y = new SimpleIntegerProperty(y);        
     }
 
     public IntegerProperty x() {
@@ -41,6 +35,7 @@ public class Entity {
         return y;
     }
 
+    
     
     
     /**
@@ -55,12 +50,12 @@ public class Entity {
         return x().get();
     }
     
-    public String getType() {
-    	return this.type; 
-    }
-    
     public boolean obstructsMovement() {
     	return this.obstructsMovement; 
+    }
+    
+    public void setObstructsMovement(boolean value) {
+    	this.obstructsMovement = value; 
     }
     
 }
