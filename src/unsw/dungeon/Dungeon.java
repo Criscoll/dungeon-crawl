@@ -85,6 +85,22 @@ public class Dungeon {
     public void setPlayer(Player player) {
         this.player = player;
     }
+    
+    public Entity getEntity(int x, int y) {
+    	for(Entity e : entities) {
+    		if(e.getX() == x && e.getY() == y)
+    			return e;
+    	}
+    	return null;
+    }
+        
+    public boolean isObstructed(int x, int y) {
+    	if(getEntity(x, y) == null)
+    		return false;
+    	return getEntity(x, y).obstructsMovement();
+    }
+
+
 
 
 }

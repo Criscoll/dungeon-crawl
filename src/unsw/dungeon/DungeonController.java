@@ -49,59 +49,24 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
-    	List<Entity> entityList = this.dungeon.getEntities();  
-    	boolean playerObstructed = false; 
-    	
         switch (event.getCode()) {
-        
         case UP:
-        	for (Entity i : entityList) {
-        		if (i.getY() == (player.getY() - 1) && i.getX() == player.getX()) { // an entity is above player
-        			playerObstructed = i.obstructsMovement();
-        			break; 
-        		}
-        	}
-        	if (!playerObstructed) player.moveUp(); 
-        	playerObstructed = false;
+            player.moveUp();
             break;
-            
         case DOWN:
-        	for (Entity i : entityList) {
-        		if (i.getY() == (player.getY() + 1) && i.getX() == player.getX()) { // an entity is below player
-        			playerObstructed = i.obstructsMovement();
-        			break; 
-        		}
-        	}
-        	if (!playerObstructed) player.moveDown(); 
-        	playerObstructed = false;
+            player.moveDown();
             break;
-            
         case LEFT:
-        	for (Entity i : entityList) {
-        		if (i.getY() == player.getY() && i.getX() == (player.getX() - 1 )) { // an entity is left of the player
-        			playerObstructed = i.obstructsMovement();
-        			break; 
-        		}
-        	}
-        	if (!playerObstructed) player.moveLeft(); 
-        	playerObstructed = false;
+            player.moveLeft();
             break;
-            
         case RIGHT:
-        	for (Entity i : entityList) {
-        		if (i.getY() == player.getY() && i.getX() == (player.getX() + 1 )) { // an entity is right of the playe
-        			playerObstructed = i.obstructsMovement();
-        			break; 
-        		}
-        	}
-        	if (!playerObstructed) player.moveRight(); 
-        	playerObstructed = false;
+            player.moveRight();
             break;
-            
         default:
             break;
         }
     }
+
 
 }
 
