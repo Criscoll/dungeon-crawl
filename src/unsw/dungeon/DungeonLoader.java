@@ -68,6 +68,22 @@ public abstract class DungeonLoader {
         	onLoad(exit);
         	entity = exit;
             break;
+            
+        case "key": 
+        	// TODO Handle key entity
+        	break; 
+        case "treasure":
+        	// TODO Handle treasure entity
+        	break; 
+        case "sword":
+        	// TODO Handle sword entity
+        	break; 
+        case "boulder":
+        	// TODO Handle boulder entity
+        	break; 
+        case "invincibility":
+        	// TODO Handle invincibility entity
+        	break; 
         }
         dungeon.addEntity(entity);
     }

@@ -49,19 +49,55 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	List<Entity> entityList = this.dungeon.getEntities();  
+    	boolean playerObstructed = false; 
+    	
         switch (event.getCode()) {
+        
         case UP:
-            player.moveUp();
+        	for (Entity i : entityList) {
+        		if (i.getY() == (player.getY() - 1) && i.getX() == player.getX()) { // an entity is above player
+        			playerObstructed = i.obstructsMovement();
+        			break; 
+        		}
+        	}
+        	if (!playerObstructed) player.moveUp(); 
+        	playerObstructed = false;
             break;
+            
         case DOWN:
-            player.moveDown();
+        	for (Entity i : entityList) {
+        		if (i.getY() == (player.getY() + 1) && i.getX() == player.getX()) { // an entity is below player
+        			playerObstructed = i.obstructsMovement();
+        			break; 
+        		}
+        	}
+        	if (!playerObstructed) player.moveDown(); 
+        	playerObstructed = false;
             break;
+            
         case LEFT:
-            player.moveLeft();
+        	for (Entity i : entityList) {
+        		if (i.getY() == player.getY() && i.getX() == (player.getX() - 1 )) { // an entity is left of the player
+        			playerObstructed = i.obstructsMovement();
+        			break; 
+        		}
+        	}
+        	if (!playerObstructed) player.moveLeft(); 
+        	playerObstructed = false;
             break;
+            
         case RIGHT:
-            player.moveRight();
+        	for (Entity i : entityList) {
+        		if (i.getY() == player.getY() && i.getX() == (player.getX() + 1 )) { // an entity is right of the playe
+        			playerObstructed = i.obstructsMovement();
+        			break; 
+        		}
+        	}
+        	if (!playerObstructed) player.moveRight(); 
+        	playerObstructed = false;
             break;
+            
         default:
             break;
         }
