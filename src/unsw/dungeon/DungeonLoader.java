@@ -52,15 +52,15 @@ public abstract class DungeonLoader {
         case "player":
             Player player = new Player(dungeon, x, y);
             // add observers here
-            ItemPickUpHandler o1 = new ItemPickUpHandler(dungeon);
-            player.attach(o1);
-            doorOpenHandler o2 = new doorOpenHandler(dungeon);
-            player.attach(o2);
-            boulderPushHandler o3 = new boulderPushHandler(dungeon);
-            player.attach(o3);
-            PortalHandler o4 = new PortalHandler(dungeon); 
-            player.attach(o4);
-              
+            ItemPickUpHandler itemObserver = new ItemPickUpHandler(dungeon);
+        	PortalHandler portalObserver = new PortalHandler(dungeon); 
+            player.attach(itemObserver);
+        	player.attach(portalObserver);
+            doorOpenHandler doorObserver = new doorOpenHandler(dungeon);
+            player.attach(doorObserver);
+            boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
+            player.attach(boulderObserver);
+
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
