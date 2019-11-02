@@ -106,7 +106,7 @@ public abstract class DungeonLoader {
         	break;
         	
         case "switch":
-        	Switch pressure_plate = new Switch(x, y); 
+        	FloorSwitch pressure_plate = new FloorSwitch(x, y); 
         	onLoad(pressure_plate); 
         	entity = pressure_plate; 
         	break;
@@ -132,7 +132,7 @@ public abstract class DungeonLoader {
     
     public abstract void onLoad(Boulder boulder);
     
-    public abstract void onLoad(Switch boulder); 
+    public abstract void onLoad(FloorSwitch boulder); 
 
     
     
