@@ -99,6 +99,7 @@ public class Dungeon {
     
     public Entity getEntity(int x, int y) {
     	for(Entity e : entities) {
+    		if(e == null) continue;
     		if(e.getX() == x && e.getY() == y)
     			return e;
     	}
