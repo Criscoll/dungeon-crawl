@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import java.util.Arrays;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

@@ -76,12 +76,12 @@ public class Player extends Entity {
 		return this.inventory;
 	}
 
-	public Key getKey() {
-		for(Entity e : getInventory()) {
-			if(e instanceof Key) {
-				return (Key) e;
-			}
-		}
-		return null;
-	}
+//	public Key getKey() {
+//		for(Entity e : getInventory()) {
+//			if(e instanceof Key) {
+//				return (Key) e;
+//			}
+//		}
+//		return null;
+//	}
 }
