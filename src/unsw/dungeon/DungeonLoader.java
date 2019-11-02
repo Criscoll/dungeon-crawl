@@ -104,10 +104,14 @@ public abstract class DungeonLoader {
         	break; 
         	
         case "treasure":
-        	// TODO Handle treasure entity
+        	Treasure treasure = new Treasure(x,y); 
+        	onLoad(treasure); 
+        	entity = treasure; 
         	break; 
         case "sword":
-        	// TODO Handle sword entity
+        	Sword sword = new Sword(x,y); 
+        	onLoad(sword); 
+        	entity = sword; 
         	break; 
         case "boulder":
         	Boulder boulder = new Boulder(x, y); 
@@ -116,7 +120,7 @@ public abstract class DungeonLoader {
         	break;
         	
         case "switch":
-        	Switch pressure_plate = new Switch(x, y); 
+        	FloorSwitch pressure_plate = new FloorSwitch(x, y); 
         	onLoad(pressure_plate); 
         	entity = pressure_plate; 
         	break;
@@ -140,11 +144,15 @@ public abstract class DungeonLoader {
     
     public abstract void onLoad(Key key);
     
+    public abstract void onLoad(Sword sword); 
+    
+    public abstract void onLoad(Treasure treasure); 
+    
     public abstract void onLoad(Portal portal); 
     
     public abstract void onLoad(Boulder boulder);
     
-    public abstract void onLoad(Switch boulder); 
+    public abstract void onLoad(FloorSwitch boulder); 
     
 
     

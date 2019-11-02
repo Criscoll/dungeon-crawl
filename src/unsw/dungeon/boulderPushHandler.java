@@ -13,8 +13,7 @@ public class boulderPushHandler implements MovementObserver{
 		if(e == null) return;
 		// player tried to move to the location of the boulder
 		if(e instanceof Boulder) {
-			
-			
+				
 			//boulder above the player
 			if(x == player.getX() && y == player.getY()-1) {
 				// only push the boulder when there is no entity in the square
@@ -72,6 +71,8 @@ public class boulderPushHandler implements MovementObserver{
 			
 			//boulder on the right side of the player
 			else if(x == player.getX() + 1 && y == player.getY()){
+				System.out.println(dungeon.getEntity(x+1,y));
+
 				if(e.getX() < dungeon.getWidth() - 1 && dungeon.getEntity(x+1, y) == null) {
 					//push away from a floor switch
 					FloorSwitch fs = dungeon.getFloorSwitch(x, y);
@@ -83,7 +84,6 @@ public class boulderPushHandler implements MovementObserver{
 					if(fs != null) {
 						fs.setActive(true);
 					}
-					
 					e.x().set(e.getX()+1);
 				}
 			}
