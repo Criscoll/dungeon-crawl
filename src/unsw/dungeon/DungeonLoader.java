@@ -39,10 +39,32 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        GoalComponent rootGoal = loadGoal(json.getJSONObject("goal-condition"));
+        dungeon.setGoal(rootGoal);
+        GoalCheckingObserver goalObserver = new GoalCheckingObserver(dungeon);
+        dungeon.getPlayer().attach(goalObserver);
+        
         return dungeon;
     }
 
-    private void loadEntity(Dungeon dungeon, JSONObject json) {
+
+	private GoalComponent loadGoal(JSONObject object) {
+		String goal = object.getString("goal");
+		if(goal.equals("AND") || goal.equals("OR")) {
+			LogicalOperator operator = new LogicalOperator("goal");
+			JSONArray jsonSubGoals = object.getJSONArray("subgoals");
+			for (int i = 0; i < jsonSubGoals.length(); i++) {
+	            operator.add(loadGoal(jsonSubGoals.getJSONObject(i)));
+	        }
+			return operator;
+		}
+		else {
+			return new Goal(goal);
+		}
+	}
+
+	private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");
