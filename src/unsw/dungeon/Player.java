@@ -12,6 +12,7 @@ public class Player extends Entity {
     private Dungeon dungeon;
     private ArrayList<Entity> inventory;
 	private ArrayList<MovementObserver> observers;
+	private boolean invincible; 
 //	private String direction;
     /**
      * Create a player positioned in square (x,y)
@@ -23,6 +24,7 @@ public class Player extends Entity {
         this.dungeon = dungeon;
         inventory = new ArrayList<>();
         observers = new ArrayList<>();
+        this.invincible = false;
     }
 
     public void moveUp() {
@@ -91,6 +93,13 @@ public class Player extends Entity {
 		this.y().set(y);
 	}
 
+	public boolean invincible () {
+		return this.invincible; 
+	}
+	
+	public void setInvinicibility(boolean value) {
+		this.invincible = value; 
+	}
 
 //	public Key getKey() {
 //		for(Entity e : getInventory()) {
