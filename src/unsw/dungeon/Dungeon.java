@@ -66,6 +66,15 @@ public class Dungeon {
     	}
     	return entityList; 
     }
+    
+    public List<Enemy> getEnemies() {
+    	List<Enemy> enemyList = new ArrayList<>(); 
+    	for (Entity i : this.entities) {
+    		if (i instanceof Enemy) 
+    			enemyList.add((Enemy)i); 
+    	}
+    	return enemyList;
+    }
 
 
     /**

@@ -76,13 +76,17 @@ public abstract class DungeonLoader {
             // add observers here
             ItemPickUpHandler itemObserver = new ItemPickUpHandler(dungeon);
         	PortalHandler portalObserver = new PortalHandler(dungeon); 
+            doorOpenHandler doorObserver = new doorOpenHandler(dungeon);
+            boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
+            EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
+            
             player.attach(itemObserver);
         	player.attach(portalObserver);
-            doorOpenHandler doorObserver = new doorOpenHandler(dungeon);
             player.attach(doorObserver);
-            boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
             player.attach(boulderObserver);
+            player.attach(enemyHandler);
 
+              
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
@@ -94,6 +98,12 @@ public abstract class DungeonLoader {
             break;
             
         // TODO Handle other possible entities
+        
+        case "enemy":
+        	Enemy enemy = new Enemy(dungeon, x,y); 
+        	onLoad(enemy); 
+        	entity = enemy; 
+        	break;
             
         case "exit":
         	Exit exit = new Exit(x, y);
@@ -145,6 +155,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Wall wall);
 
     // TODO Create additional abstract methods for the other entities
+    
+    public abstract void onLoad(Enemy enemy); 
 
     public abstract void onLoad(Exit exit);
     
@@ -155,6 +167,7 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Boulder boulder);
     
     public abstract void onLoad(FloorSwitch boulder); 
+
 
     
     
