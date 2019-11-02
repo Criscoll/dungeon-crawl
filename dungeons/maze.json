@@ -3,11 +3,6 @@
   "height": 18,
   "entities": [
     {
-      "x": 2,
-      "y": 6,
-      "type": "enemy"
-    },
-    {
       "x": 0,
       "y": 0,
       "type": "wall"
