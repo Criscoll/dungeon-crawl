@@ -74,7 +74,23 @@ public class Player extends Entity {
     
 	public ArrayList<Entity> getInventory() {
 		return this.inventory;
+		
 	}
+	
+	
+	
+	/**
+	 * Getters & Setters
+	 * @param x
+	 */
+	public void setX(int x) {
+		this.x().set(x);
+	}
+
+	public void setY(int y) {
+		this.y().set(y);
+	}
+
 
 //	public Key getKey() {
 //		for(Entity e : getInventory()) {

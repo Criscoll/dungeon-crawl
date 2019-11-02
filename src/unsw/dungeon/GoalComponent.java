@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 public interface GoalComponent {
 
-	private boolean getValue(); 
-	private String getName(); 
+	public boolean getValue(); 
+	public String getName(); 
 	
 }

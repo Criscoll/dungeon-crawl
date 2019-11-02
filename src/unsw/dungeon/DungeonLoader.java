@@ -52,8 +52,11 @@ public abstract class DungeonLoader {
         case "player":
             Player player = new Player(dungeon, x, y);
             // add observers here
-            ItemPickUpHandler o1 = new ItemPickUpHandler(dungeon);
-            player.attach(o1);
+            ItemPickUpHandler itemObserver = new ItemPickUpHandler(dungeon);
+        	PortalHandler portalObserver = new PortalHandler(dungeon); 
+            player.attach(itemObserver);
+        	player.attach(portalObserver);
+
 
             dungeon.setPlayer(player);
             onLoad(player);
@@ -80,6 +83,13 @@ public abstract class DungeonLoader {
         	entity = key;
         	break; 
         	
+        case "portal": 
+        	id = json.getInt("id");
+        	Portal portal = new Portal(x, y, id);
+        	onLoad(portal);
+        	entity = portal;
+        	break; 
+        	
         case "treasure":
         	// TODO Handle treasure entity
         	break; 
@@ -87,8 +97,17 @@ public abstract class DungeonLoader {
         	// TODO Handle sword entity
         	break; 
         case "boulder":
-        	// TODO Handle boulder entity
-        	break; 
+        	Boulder boulder = new Boulder(x, y); 
+        	onLoad(boulder); 
+        	entity = boulder; 
+        	break;
+        	
+        case "switch":
+        	Switch pressure_plate = new Switch(x, y); 
+        	onLoad(pressure_plate); 
+        	entity = pressure_plate; 
+        	break;
+        	
         case "invincibility":
         	// TODO Handle invincibility entity
         	break; 
@@ -105,4 +124,13 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Exit exit);
     
     public abstract void onLoad(Key key);
+    
+    public abstract void onLoad(Portal portal); 
+    
+    public abstract void onLoad(Boulder boulder);
+    
+    public abstract void onLoad(Switch boulder); 
+
+    
+    
 }

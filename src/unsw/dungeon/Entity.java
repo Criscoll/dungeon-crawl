@@ -15,6 +15,7 @@ public class Entity {
     private IntegerProperty x, y;
     private boolean obstructsMovement = false; 
     private boolean pickupable = false;
+    private boolean portal = false; 
     
     /**
      * Create an entity positioned in square (x,y)
@@ -62,4 +63,12 @@ public class Entity {
 		this.pickupable = value;
 	}
     
+	public boolean isPortal() {
+		return this.portal;
+	}
+
+	public void setPortal(boolean value) {
+		this.portal = value;
+	}
+	
 }
