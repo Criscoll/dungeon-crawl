@@ -175,15 +175,4 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Boulder boulder);
     
     public abstract void onLoad(FloorSwitch boulder); 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    
->>>>>>> 8a3c87041caa46c72f46ec7caed98d5fa9ee6b9d
-=======
-
->>>>>>> goal
-
-    
-    
 }
