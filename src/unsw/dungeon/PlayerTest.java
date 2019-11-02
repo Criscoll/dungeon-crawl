@@ -186,6 +186,31 @@ class PlayerTest {
 		assertEquals(1, boulder.getY());	
 	}
 	
+	/**
+	 * if a boulder is pushing to a floor switch then it should be activated
+	 * if it was pushed away then the floor switch will be deactivated
+	 */
+	@Test
+	void testFloorSwitch() {
+		Boulder boulder = new Boulder(0, 1);
+		this.dungeon.addEntity(boulder);
+		FloorSwitch floorSwitch = new FloorSwitch(0, 2);
+		this.dungeon.addEntity(floorSwitch);
+		player.moveDown();
+		assertTrue(floorSwitch.isActive());		
+		player.moveDown();
+		assertFalse(floorSwitch.isActive());
 		
-	
+		player.moveRight();
+		player.moveRight();
+		
+		boulder = new Boulder(1, 2);
+		this.dungeon.addEntity(boulder);
+		player.moveLeft();
+		assertTrue(floorSwitch.isActive());		
+		player.moveLeft();
+		assertTrue(floorSwitch.isActive());	
+		assertEquals(1, player.getX());
+		assertEquals(2, player.getY());
+	}
 }
