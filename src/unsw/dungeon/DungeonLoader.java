@@ -54,7 +54,11 @@ public abstract class DungeonLoader {
             // add observers here
             ItemPickUpHandler o1 = new ItemPickUpHandler(dungeon);
             player.attach(o1);
-
+            doorOpenHandler o2 = new doorOpenHandler(dungeon);
+            player.attach(o2);
+            boulderPushHandler o3 = new boulderPushHandler(dungeon);
+            player.attach(o3);
+              
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
