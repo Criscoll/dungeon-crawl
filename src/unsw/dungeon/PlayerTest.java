@@ -98,8 +98,9 @@ class PlayerTest {
 		player.moveRight();
 		assertEquals(player.getX(), 2);
 		assertEquals(player.getY(), 0);
-		assertTrue(player.getKey() == null);
-		
+		for(Entity entity : player.getInventory()) {
+			assertFalse(entity instanceof Key);
+		}
 		player.moveRight();
 		player.moveLeft();
 		assertEquals(player.getX(), 2);

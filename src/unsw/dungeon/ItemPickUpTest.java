@@ -44,7 +44,7 @@ class ItemPickUpTest {
 	}
 	
 	/**
-	 * test pick up treasure
+	 * test treasure pick up 
 	 * The treasure disappear from the map after player picked it up
 	 * Player should pick up treasure automatically by moving into the same square as the item
 	 * A player should not have a limit to the amount of treasure they can pick up
@@ -65,5 +65,21 @@ class ItemPickUpTest {
 		assertTrue(this.dungeon.getEntity(3, 0) == null);
 		
 	}
-	
+	/**
+	 * test sword pick up
+	 * A player should be able to pick up a sword by moving into its square 
+  	 * A player should not be able to pick up another sword if a sword is currently in their possession
+  	 * The sword disappear from the map after player picked it up
+	 */
+	@Test
+	void testSword() {
+		Sword sword = new Sword(1, 0);
+		this.dungeon.addEntity(sword);
+		player.moveRight();
+		assertTrue(this.dungeon.getEntity(1, 0) == null);
+		sword = new Sword(2, 0);
+		this.dungeon.addEntity(sword);
+		player.moveRight();
+		assertTrue(this.dungeon.getEntity(2, 0) instanceof Sword);
+	}
 }

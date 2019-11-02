@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class doorOpenHandler implements MovementObserver{
 
 	private Dungeon dungeon;
@@ -13,10 +15,13 @@ public class doorOpenHandler implements MovementObserver{
 		Entity e = dungeon.getEntity(x, y);
 		if(e == null) return;
 		if(e instanceof Door && !((Door) e).isOpen()) {
-			Key key = player.getKey();
-			if(key != null && ((Door) e).getId() == key.getId()) {
-				((Door) e).openDoor();
-				player.getInventory().remove(key);
+			ArrayList<Entity> entities = player.getInventory();
+			for(Entity entity : entities) {
+				if(entity instanceof Key && ((Door) e).getId() == ((Key)entity).getId()) {
+					((Door) e).openDoor();
+					player.getInventory().remove(entity);		
+					break;
+				}
 			}
 		}
 	}
