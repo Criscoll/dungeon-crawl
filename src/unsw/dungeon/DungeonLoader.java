@@ -54,13 +54,17 @@ public abstract class DungeonLoader {
             // add observers here
             ItemPickUpHandler itemObserver = new ItemPickUpHandler(dungeon);
         	PortalHandler portalObserver = new PortalHandler(dungeon); 
+            doorOpenHandler doorObserver = new doorOpenHandler(dungeon);
+            boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
+            EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
+            
             player.attach(itemObserver);
         	player.attach(portalObserver);
-            doorOpenHandler doorObserver = new doorOpenHandler(dungeon);
             player.attach(doorObserver);
-            boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
             player.attach(boulderObserver);
+            player.attach(enemyHandler);
 
+              
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
@@ -72,6 +76,12 @@ public abstract class DungeonLoader {
             break;
             
         // TODO Handle other possible entities
+        
+        case "enemy":
+        	Enemy enemy = new Enemy(dungeon, x,y); 
+        	onLoad(enemy); 
+        	entity = enemy; 
+        	break;
             
         case "exit":
         	Exit exit = new Exit(x, y);
@@ -94,10 +104,14 @@ public abstract class DungeonLoader {
         	break; 
         	
         case "treasure":
-        	// TODO Handle treasure entity
+        	Treasure treasure = new Treasure(x,y); 
+        	onLoad(treasure); 
+        	entity = treasure; 
         	break; 
         case "sword":
-        	// TODO Handle sword entity
+        	Sword sword = new Sword(x,y); 
+        	onLoad(sword); 
+        	entity = sword; 
         	break; 
         case "boulder":
         	Boulder boulder = new Boulder(x, y); 
@@ -123,16 +137,26 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Wall wall);
 
     // TODO Create additional abstract methods for the other entities
+    
+    public abstract void onLoad(Enemy enemy); 
 
     public abstract void onLoad(Exit exit);
     
     public abstract void onLoad(Key key);
+    
+    public abstract void onLoad(Sword sword); 
+    
+    public abstract void onLoad(Treasure treasure); 
     
     public abstract void onLoad(Portal portal); 
     
     public abstract void onLoad(Boulder boulder);
     
     public abstract void onLoad(FloorSwitch boulder); 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 8a3c87041caa46c72f46ec7caed98d5fa9ee6b9d
 
     
     

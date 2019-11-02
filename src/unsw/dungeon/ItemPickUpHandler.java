@@ -20,10 +20,7 @@ public class ItemPickUpHandler implements MovementObserver{
 				if(e instanceof Sword && entity instanceof Sword)
 					return;
 			}
-//			e = dungeon.popEntity(x, y);
 			dungeon.removeEntity(x, y);
-//			e.x().set(-1);
-//			e.y().set(-1);
 			player.getInventory().add(e);		
 			
 		}
