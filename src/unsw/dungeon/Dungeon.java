@@ -20,22 +20,37 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
-
+    private List<Entity> floorSwitches;
+    
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
+        this.floorSwitches = new ArrayList<>();
         this.player = null;
     }
     
     
     public void addEntity(Entity entity) {
-        entities.add(entity);
+    	if(entity instanceof FloorSwitch) {
+    		floorSwitches.add(entity);
+    	}else {
+    		entities.add(entity);    		
+    	}
     }
     
-//    public ArrayList<Entity> getEntities() {
-//    	return (ArrayList<Entity>) this.entities;
-//    }
+    public ArrayList<Entity> getFloorSwitches() {
+    	return (ArrayList<Entity>) this.floorSwitches;
+    }
+
+    public FloorSwitch getFloorSwitch(int x, int y) {
+    	for(Entity entity : floorSwitches) {
+    		if(x == entity.getX() && y == entity.getY()) {
+    			return (FloorSwitch) entity;
+    		}
+    	}
+    	return null;
+    }
     /**
      * Searches entities in the dungeon by name and returns each one in an arrayList. If no entities 
      * found, returns empty list. 

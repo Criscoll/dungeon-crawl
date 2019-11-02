@@ -12,7 +12,7 @@ public class Player extends Entity {
     private Dungeon dungeon;
     private ArrayList<Entity> inventory;
 	private ArrayList<MovementObserver> observers;
-	
+//	private String direction;
     /**
      * Create a player positioned in square (x,y)
      * @param x

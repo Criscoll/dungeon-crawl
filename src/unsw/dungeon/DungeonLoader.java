@@ -56,8 +56,11 @@ public abstract class DungeonLoader {
         	PortalHandler portalObserver = new PortalHandler(dungeon); 
             player.attach(itemObserver);
         	player.attach(portalObserver);
-
-
+            doorOpenHandler doorObserver = new doorOpenHandler(dungeon);
+            player.attach(doorObserver);
+            boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
+            player.attach(boulderObserver);
+              
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
