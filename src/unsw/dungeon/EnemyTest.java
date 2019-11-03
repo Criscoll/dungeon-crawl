@@ -18,7 +18,7 @@ class EnemyTest {
 		player = new Player(dungeon, 5, 5);
 		
 		EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
-		player.attach(enemyHandler);
+		player.attachMovementObserver(enemyHandler);
 		dungeon.setPlayer(player);
 		
 		

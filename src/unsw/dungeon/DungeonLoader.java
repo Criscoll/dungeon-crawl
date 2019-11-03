@@ -80,17 +80,23 @@ public abstract class DungeonLoader {
             boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
             EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
             
-            player.attach(itemObserver);
-        	player.attach(portalObserver);
-            player.attach(doorObserver);
-            player.attach(boulderObserver);
-            player.attach(enemyHandler);
-
+            SwordHandler swordHandler = new SwordHandler(dungeon); 
+            AttackHandler attackHandler = new AttackHandler(dungeon); 
+            
+            player.attachMovementObserver(itemObserver);
+        	player.attachMovementObserver(portalObserver);
+            player.attachMovementObserver(doorObserver);
+            player.attachMovementObserver(boulderObserver);
+            player.attachMovementObserver(enemyHandler);
+            
+            player.attachAttackObserver(attackHandler);
+            player.attachAttackObserver(swordHandler);
               
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
             break;
+            
         case "wall":
             Wall wall = new Wall(x, y);
             onLoad(wall);
@@ -148,7 +154,9 @@ public abstract class DungeonLoader {
         	break;
         	
         case "invincibility":
-        	// TODO Handle invincibility entity
+        	Potion potion = new Potion(x, y); 
+        	onLoad(potion); 
+        	entity = potion; 
         	break; 
         }
         dungeon.addEntity(entity);
@@ -169,6 +177,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Sword sword); 
     
     public abstract void onLoad(Treasure treasure); 
+    
+    public abstract void onLoad(Potion potion); 
     
     public abstract void onLoad(Portal portal); 
     
