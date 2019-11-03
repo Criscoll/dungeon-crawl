@@ -117,7 +117,21 @@ class EnemyTest {
 	
 	@Test
 	void testCollisionDetect() {
+		Enemy enemy = new Enemy(dungeon, 5, 8);
+		Wall wall = new Wall(6, 8); 
+		this.dungeon.addEntity(wall);
+		this.dungeon.addEntity(enemy);
 
+		assertEquals(enemy.getX(), 5); 
+		assertEquals(enemy.getY(), 8); 
+		
+		assertTrue(dungeon.getEntity(6, 8) instanceof Wall); 
+		assertTrue(dungeon.isObstructed(6, 8) == true); 
+		
+		enemy.moveRight();
+		
+		assertEquals(enemy.getX(), 5); 
+		assertEquals(enemy.getY(), 8); 
 
 	}
 	
