@@ -19,7 +19,7 @@ public class PortalTest {
 		this.dungeon = new Dungeon(height, width);
 		player = new Player(dungeon, 5, 5);
 		PortalHandler o1 = new PortalHandler(this.dungeon);
-		player.attach(o1);
+		player.attachMovementObserver(o1);
 		dungeon.setPlayer(player);
 	}
 

@@ -17,7 +17,7 @@ class ItemPickUpTest {
 		this.dungeon = new Dungeon(height, width);
 		player = new Player(dungeon, 0, 0);
 		ItemPickUpHandler o1 = new ItemPickUpHandler(this.dungeon);
-		player.attach(o1);
+		player.attachMovementObserver(o1);
 		dungeon.setPlayer(player);
 	}
 
