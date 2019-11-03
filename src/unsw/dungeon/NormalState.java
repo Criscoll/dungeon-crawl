@@ -19,12 +19,14 @@ public class NormalState extends EnemyState {
 		// case 2: on the same row
 		if (pY == eY) {
 			if (pX > eX && pX != (eX + 1)) { this.enemy.moveRight(); return;} 
-			else if (pX != (eX - 1)){this.enemy.moveLeft(); return; } 
+			else if (pX < eX && pX != (eX - 1)){this.enemy.moveLeft(); return; } 
+			else return; 
 		}
 		
 		if (pX == eX) {
-			if (pY > eY && pY != (eY - 1)) { this.enemy.moveDown(); return;} 
-			else if (pY != (eY + 1)){this.enemy.moveUp(); return; } 
+			if (pY > eY && pY != (eY + 1)) { this.enemy.moveDown(); return;} 
+			else if (pY < eY && pY != (eY - 1)){this.enemy.moveUp(); return; } 
+			else return; 
 		}		
 		
 		// case 3: not on the same row

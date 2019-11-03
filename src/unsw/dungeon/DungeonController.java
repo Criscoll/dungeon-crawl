@@ -49,6 +49,7 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	if (this.player.dead()) return; // if player dead, ignore inputs
         switch (event.getCode()) {
         case UP:
             player.moveUp();

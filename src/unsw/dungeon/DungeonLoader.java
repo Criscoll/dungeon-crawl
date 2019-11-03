@@ -158,7 +158,14 @@ public abstract class DungeonLoader {
         	onLoad(potion); 
         	entity = potion; 
         	break; 
-        }
+        
+	    case "door":
+        	id = json.getInt("id");
+	    	Door door = new Door(x, y, id); 
+	    	onLoad(door); 
+	    	entity = door; 
+	    	break; 
+	    }
         dungeon.addEntity(entity);
     }
 
@@ -185,4 +192,11 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Boulder boulder);
     
     public abstract void onLoad(FloorSwitch boulder); 
+
+    
+    public abstract void onLoad(Door door); 
+
+    
+    
+    
 }

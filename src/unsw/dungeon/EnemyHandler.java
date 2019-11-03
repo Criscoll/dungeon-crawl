@@ -16,6 +16,8 @@ public class EnemyHandler implements MovementObserver {
 
 		
 		for (Enemy enemy : enemies) {
+			if (enemy.getX() == player.getX() && enemy.getY() == player.getY()) this.dungeon.killPlayer();
+			
 			if (player.invincible()) enemy.changeState(new InvincibilityState(enemy));
 			else enemy.changeState(new NormalState(enemy));
 			
