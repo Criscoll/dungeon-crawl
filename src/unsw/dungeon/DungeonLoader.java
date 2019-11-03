@@ -43,7 +43,7 @@ public abstract class DungeonLoader {
         GoalComponent rootGoal = loadGoal(json.getJSONObject("goal-condition"));
         dungeon.setGoal(rootGoal);
         GoalCheckingObserver goalObserver = new GoalCheckingObserver(dungeon);
-        dungeon.getPlayer().attach(goalObserver);
+        dungeon.getPlayer().attachMovementObserver(goalObserver);
         
         return dungeon;
     }

@@ -153,12 +153,4 @@ public class Player extends Entity {
 		this.sword = value; 
 	}
 
-//	public Key getKey() {
-//		for(Entity e : getInventory()) {
-//			if(e instanceof Key) {
-//				return (Key) e;
-//			}
-//		}
-//		return null;
-//	}
 }

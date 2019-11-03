@@ -17,12 +17,18 @@ class GoalTest {
 		this.dungeon = new Dungeon(height, width);
 		player = new Player(dungeon, 0, 0);
 		ItemPickUpHandler o1 = new ItemPickUpHandler(this.dungeon);
-		player.attach(o1);
+		player.attachMovementObserver(o1);
 		doorOpenHandler o2 = new doorOpenHandler(this.dungeon);
-		player.attach(o2);
+		player.attachMovementObserver(o2);
 		boulderPushHandler o3 = new boulderPushHandler(this.dungeon);
-		player.attach(o3);
+		player.attachMovementObserver(o3);
+		EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
+		player.attachMovementObserver(enemyHandler);
 		
+		player.setSword(true);
+		
+		AttackHandler attackHandler = new AttackHandler(dungeon); 
+		player.attachAttackObserver(attackHandler);
 		dungeon.setPlayer(player);
 		
 	}
@@ -42,7 +48,7 @@ class GoalTest {
 		Goal exitGoal = new Goal("exit");
 		this.dungeon.setGoal(exitGoal);
 		GoalCheckingObserver o4 = new GoalCheckingObserver(this.dungeon);
-		player.attach(o4);
+		player.attachMovementObserver(o4);
 		
 		
 		Exit exit = new Exit(1, 1);
@@ -69,7 +75,7 @@ class GoalTest {
 		this.dungeon.setGoal(lo);
 
 		GoalCheckingObserver o4 = new GoalCheckingObserver(this.dungeon);
-		player.attach(o4);		
+		player.attachMovementObserver(o4);		
 		
 		Exit exit = new Exit(2, 0);
 		this.dungeon.addEntity(exit);
@@ -128,7 +134,7 @@ class GoalTest {
 		this.dungeon.setGoal(lo);
 
 		GoalCheckingObserver o4 = new GoalCheckingObserver(this.dungeon);
-		player.attach(o4);		
+		player.attachMovementObserver(o4);		
 		
 		Exit exit = new Exit(2, 0);
 		this.dungeon.addEntity(exit);
@@ -162,7 +168,7 @@ class GoalTest {
 		this.dungeon.setGoal(lo);
 		
 		GoalCheckingObserver o4 = new GoalCheckingObserver(this.dungeon);
-		player.attach(o4);
+		player.attachMovementObserver(o4);
 		
 		Exit exit = new Exit(2, 0);
 		this.dungeon.addEntity(exit);
@@ -183,6 +189,38 @@ class GoalTest {
 		assertTrue(this.dungeon.isLevelCompleted());
 		
 	}
+	
+	/**
+	 * test enemy goal
+	 */
+	@Test
+	void testEnemy() {
+		LogicalOperator lo = new LogicalOperator("AND");
+		Goal goal1 = new Goal("exit");
+		lo.add(goal1);
+		Goal goal2 = new Goal("enemies");
+		lo.add(goal2);
+		this.dungeon.setGoal(lo);
+		
+		Exit exit = new Exit(2, 0);
+		this.dungeon.addEntity(exit);
+
+		GoalCheckingObserver o4 = new GoalCheckingObserver(this.dungeon);
+		player.attachMovementObserver(o4);
+						
+		Enemy enemy = new Enemy(dungeon, 1, 0);
+		this.dungeon.addEntity(enemy);
+		assertTrue(dungeon.getEntity(1, 0) instanceof Enemy);  
+		assertTrue(dungeon.getEntity(1, 0) != null);  
+		
+		player.attackRight();
+		assertTrue(dungeon.getEntity(1, 0) == null);
+		
+		player.moveRight();
+		assertTrue(dungeon.canPlayerExit());
+		assertFalse(dungeon.isLevelCompleted());
+	}
+	
 	
 	/** 
 	 * test complicate goal condition
@@ -218,7 +256,7 @@ class GoalTest {
 
 		
 		GoalCheckingObserver o4 = new GoalCheckingObserver(this.dungeon);
-		player.attach(o4);
+		player.attachMovementObserver(o4);
 		
 		// player needs to pick all treasures up to exit
 		player.moveDown();
