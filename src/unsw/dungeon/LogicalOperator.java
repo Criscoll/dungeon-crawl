@@ -18,12 +18,12 @@ public class LogicalOperator implements GoalComponent{
 		boolean value = subGoals.get(0).getValue();
 		
 		if(this.operator.equals("AND")) {
-			for (int i = 1; i <= subGoals.size(); i++) {
+			for (int i = 1; i < subGoals.size(); i++) {
 				value = (value && subGoals.get(i).getValue());
 			}
 		}
 		else if(this.operator.equals("OR")) {
-			for (int i = 1; i <= subGoals.size(); i++) {
+			for (int i = 1; i < subGoals.size(); i++) {
 				value = (value || subGoals.get(i).getValue());
 			}
 		}

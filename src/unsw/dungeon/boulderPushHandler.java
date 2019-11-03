@@ -71,7 +71,6 @@ public class boulderPushHandler implements MovementObserver{
 			
 			//boulder on the right side of the player
 			else if(x == player.getX() + 1 && y == player.getY()){
-				System.out.println(dungeon.getEntity(x+1,y));
 
 				if(e.getX() < dungeon.getWidth() - 1 && dungeon.getEntity(x+1, y) == null) {
 					//push away from a floor switch

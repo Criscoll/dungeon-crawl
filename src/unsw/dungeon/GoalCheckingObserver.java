@@ -58,14 +58,20 @@ public class GoalCheckingObserver implements MovementObserver{
 			}
 		}
 		
-		System.out.println(dungeon.canPlayerExit());
-//		if(this.enemyGoalExist && !this.enemyGoal) {
-//			List<Enemy> enemies = this.dungeon.getEnemies();
-//			if(enemies.size() == null) {
-//				dungeon.getGoal().setGoalToTrue("enemies");	
-//				this.enemyGoal = true;
-//			}
-//		}
+		if(this.enemyGoalExist && !this.enemyGoal) {
+			List<Enemy> enemies = this.dungeon.getEnemies();
+			if(enemies.size() == 0) {
+				dungeon.getGoal().setGoalToTrue("enemies");	
+				this.enemyGoal = true;
+			}
+		}
+		
+//		System.out.println(dungeon.canPlayerExit());
+		if(this.dungeon.getEntity(x, y) instanceof Exit && dungeon.canPlayerExit()) {
+			this.dungeon.setLevelCompleted(true);
+//			System.out.println("Level= " + dungeon.isLevelCompleted());
+		}
+		
 	}
 
 }

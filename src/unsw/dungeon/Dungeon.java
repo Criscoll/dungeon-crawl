@@ -22,6 +22,7 @@ public class Dungeon {
     private Player player;
     private List<Entity> floorSwitches;
     private GoalComponent goal;
+	public boolean levelCompleted;
     
     public Dungeon(int width, int height) {
         this.width = width;
@@ -30,6 +31,7 @@ public class Dungeon {
         this.floorSwitches = new ArrayList<>();
         this.player = null;
         goal = null;
+        levelCompleted = false;
     }
     
     
@@ -129,5 +131,15 @@ public class Dungeon {
 	
 	public boolean canPlayerExit() {
 		return goal.getValue();
+	}
+
+
+	public void setLevelCompleted(boolean value) {
+		this.levelCompleted = true;
+	}
+
+
+	public boolean isLevelCompleted() {
+		return levelCompleted;
 	}
 }

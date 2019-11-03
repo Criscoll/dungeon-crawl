@@ -52,7 +52,7 @@ public abstract class DungeonLoader {
 	private GoalComponent loadGoal(JSONObject object) {
 		String goal = object.getString("goal");
 		if(goal.equals("AND") || goal.equals("OR")) {
-			LogicalOperator operator = new LogicalOperator("goal");
+			LogicalOperator operator = new LogicalOperator(goal);
 			JSONArray jsonSubGoals = object.getJSONArray("subgoals");
 			for (int i = 0; i < jsonSubGoals.length(); i++) {
 	            operator.add(loadGoal(jsonSubGoals.getJSONObject(i)));
