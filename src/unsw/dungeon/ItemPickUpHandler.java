@@ -21,6 +21,8 @@ public class ItemPickUpHandler implements MovementObserver{
 					return;
 			}
 			if (e instanceof Sword) player.setSword(true); // player now has a sword
+			if (e instanceof Potion) player.setInvinicibility(true); // player is now invincible
+			
 			dungeon.removeEntity(x, y);
 			player.getInventory().add(e);		
 			

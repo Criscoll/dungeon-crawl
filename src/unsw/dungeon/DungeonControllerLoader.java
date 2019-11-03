@@ -96,7 +96,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
 
-    
+    @Override
+    public void onLoad(Potion potion) {
+        ImageView view = new ImageView(potionImage);
+        addEntity(potion, view);
+    }
     
     @Override
     public void onLoad(Portal portal) {
