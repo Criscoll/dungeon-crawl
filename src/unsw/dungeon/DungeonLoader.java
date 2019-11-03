@@ -39,10 +39,32 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        GoalComponent rootGoal = loadGoal(json.getJSONObject("goal-condition"));
+        dungeon.setGoal(rootGoal);
+        GoalCheckingObserver goalObserver = new GoalCheckingObserver(dungeon);
+        dungeon.getPlayer().attachMovementObserver(goalObserver);
+        
         return dungeon;
     }
 
-    private void loadEntity(Dungeon dungeon, JSONObject json) {
+
+	private GoalComponent loadGoal(JSONObject object) {
+		String goal = object.getString("goal");
+		if(goal.equals("AND") || goal.equals("OR")) {
+			LogicalOperator operator = new LogicalOperator(goal);
+			JSONArray jsonSubGoals = object.getJSONArray("subgoals");
+			for (int i = 0; i < jsonSubGoals.length(); i++) {
+	            operator.add(loadGoal(jsonSubGoals.getJSONObject(i)));
+	        }
+			return operator;
+		}
+		else {
+			return new Goal(goal);
+		}
+	}
+
+	private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");
@@ -58,17 +80,23 @@ public abstract class DungeonLoader {
             boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
             EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
             
-            player.attach(itemObserver);
-        	player.attach(portalObserver);
-            player.attach(doorObserver);
-            player.attach(boulderObserver);
-            player.attach(enemyHandler);
-
+            SwordHandler swordHandler = new SwordHandler(dungeon); 
+            AttackHandler attackHandler = new AttackHandler(dungeon); 
+            
+            player.attachMovementObserver(itemObserver);
+        	player.attachMovementObserver(portalObserver);
+            player.attachMovementObserver(doorObserver);
+            player.attachMovementObserver(boulderObserver);
+            player.attachMovementObserver(enemyHandler);
+            
+            player.attachAttackObserver(attackHandler);
+            player.attachAttackObserver(swordHandler);
               
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
             break;
+            
         case "wall":
             Wall wall = new Wall(x, y);
             onLoad(wall);
@@ -104,10 +132,14 @@ public abstract class DungeonLoader {
         	break; 
         	
         case "treasure":
-        	// TODO Handle treasure entity
+        	Treasure treasure = new Treasure(x,y); 
+        	onLoad(treasure); 
+        	entity = treasure; 
         	break; 
         case "sword":
-        	// TODO Handle sword entity
+        	Sword sword = new Sword(x,y); 
+        	onLoad(sword); 
+        	entity = sword; 
         	break; 
         case "boulder":
         	Boulder boulder = new Boulder(x, y); 
@@ -116,13 +148,15 @@ public abstract class DungeonLoader {
         	break;
         	
         case "switch":
-        	Switch pressure_plate = new Switch(x, y); 
+        	FloorSwitch pressure_plate = new FloorSwitch(x, y); 
         	onLoad(pressure_plate); 
         	entity = pressure_plate; 
         	break;
         	
         case "invincibility":
-        	// TODO Handle invincibility entity
+        	Potion potion = new Potion(x, y); 
+        	onLoad(potion); 
+        	entity = potion; 
         	break; 
         }
         dungeon.addEntity(entity);
@@ -140,13 +174,15 @@ public abstract class DungeonLoader {
     
     public abstract void onLoad(Key key);
     
+    public abstract void onLoad(Sword sword); 
+    
+    public abstract void onLoad(Treasure treasure); 
+    
+    public abstract void onLoad(Potion potion); 
+    
     public abstract void onLoad(Portal portal); 
     
     public abstract void onLoad(Boulder boulder);
     
-    public abstract void onLoad(Switch boulder); 
-    
-
-    
-    
+    public abstract void onLoad(FloorSwitch boulder); 
 }

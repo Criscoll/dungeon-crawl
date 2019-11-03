@@ -11,8 +11,10 @@ public class Player extends Entity {
 
     private Dungeon dungeon;
     private ArrayList<Entity> inventory;
-	private ArrayList<MovementObserver> observers;
+	private ArrayList<MovementObserver> movementObservers;
+	private ArrayList<AttackObserver> attackObservers; 
 	private boolean invincible; 
+	private boolean sword; 
 //	private String direction;
     /**
      * Create a player positioned in square (x,y)
@@ -23,57 +25,99 @@ public class Player extends Entity {
         super(x, y);
         this.dungeon = dungeon;
         inventory = new ArrayList<>();
-        observers = new ArrayList<>();
+        movementObservers = new ArrayList<>();
+        attackObservers = new ArrayList<>(); 
         this.invincible = false;
+        this.sword = false; 
     }
 
     public void moveUp() {
-    	notifyObservers(getX(), getY() - 1);
+    	notifyMovementObservers(getX(), getY() - 1);
     	if (dungeon.isObstructed(getX(), getY() - 1)) return;
         if (getY() > 0)
             y().set(getY() - 1);
     }
 
     public void moveDown() {
-    	notifyObservers(getX(), getY() + 1);
+    	notifyMovementObservers(getX(), getY() + 1);
     	if (dungeon.isObstructed(getX(), getY() + 1)) return;
         if (getY() < dungeon.getHeight() - 1)
             y().set(getY() + 1);
     }
 
     public void moveLeft() {
-    	notifyObservers(getX() - 1, getY());
+    	notifyMovementObservers(getX() - 1, getY());
     	if (dungeon.isObstructed(getX() - 1, getY())) return;
         if (getX() > 0)
             x().set(getX() - 1);
     }
 
     public void moveRight() {
-    	notifyObservers(getX() + 1, getY());
+    	notifyMovementObservers(getX() + 1, getY());
     	if (dungeon.isObstructed(getX() + 1, getY())) return;
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
     }
     
+    
+    public void attackUp() {
+    	if (!this.sword) return; 
+    	notifyAttackObservers(getX(), getY() - 1);
+    }
+
+    public void attackDown() {
+    	if (!this.sword) return; 
+    	notifyAttackObservers(getX(), getY() + 1);
+    }
+
+    public void attackLeft() {
+    	if (!this.sword) return; 
+    	notifyAttackObservers(getX() - 1, getY());
+    }
+
+    public void attackRight() {
+    	if (!this.sword) return; 
+    	notifyAttackObservers(getX() + 1, getY());
+    }    
     /**
      * apply observer pattern to player
-     * So that the change that due to the movement of the player are dynamically
+     * So that the change that due to the movement of the player are dynamically handled
      */
-    public void notifyObservers(int x, int y) {
-		for(MovementObserver o : observers) {
+    public void notifyMovementObservers(int x, int y) {
+		for(MovementObserver o : movementObservers) {
 			o.update(x, y, this);
 		}
 	}
 
-	public void attach(MovementObserver o) {
-		observers.add(o);
+	public void attachMovementObserver(MovementObserver o) {
+		movementObservers.add(o);
 		
 	}
 
-	public void detach(MovementObserver o) {
-		observers.remove(o);
+	public void detachMovementObserver(MovementObserver o) {
+		movementObservers.remove(o);
 	}
     
+	
+	/**
+	 * Apply observer pattern to player
+	 * Any change due to player attacks are dynamically handled
+	 */
+	public void notifyAttackObservers(int x, int y) {
+		for (AttackObserver o : attackObservers) {
+			o.update(x, y);
+		}
+	}
+	
+	public void attachAttackObserver(AttackObserver o) {
+		attackObservers.add(o); 
+	}
+	
+	public void detachAttackObserver(AttackObserver o) {
+		attackObservers.remove(o); 
+	}
+	
+	
 	public ArrayList<Entity> getInventory() {
 		return this.inventory;
 		
@@ -100,13 +144,13 @@ public class Player extends Entity {
 	public void setInvinicibility(boolean value) {
 		this.invincible = value; 
 	}
+	
+	public boolean sword() {
+		return this.sword; 
+	}
+	
+	public void setSword(boolean value) {
+		this.sword = value; 
+	}
 
-//	public Key getKey() {
-//		for(Entity e : getInventory()) {
-//			if(e instanceof Key) {
-//				return (Key) e;
-//			}
-//		}
-//		return null;
-//	}
 }

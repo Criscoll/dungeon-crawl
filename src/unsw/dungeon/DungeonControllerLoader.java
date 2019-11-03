@@ -30,6 +30,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image boulderImage; 
     private Image switchImage; 
     private Image elfImage; 
+    private Image swordImage; 
+    private Image treasureImage; 
+    private Image potionImage; 
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -43,7 +46,9 @@ public class DungeonControllerLoader extends DungeonLoader {
         boulderImage = new Image("/boulder.png"); 
         switchImage = new Image("/pressure_plate.png"); 
         elfImage = new Image("/deep_elf_master_archer.png"); 
-        
+        swordImage = new Image("/greatsword_1_new.png");
+        treasureImage = new Image("/gold_pile.png");
+        potionImage = new Image("/brilliant_blue_new.png");
         
     }
 
@@ -78,6 +83,24 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(key, view);
     }
     
+    @Override
+    public void onLoad(Sword sword) {
+        ImageView view = new ImageView(swordImage);
+        addEntity(sword, view);
+    }
+    
+    @Override
+    public void onLoad(Treasure treasure) {
+        ImageView view = new ImageView(treasureImage);
+        addEntity(treasure, view);
+    }
+    
+
+    @Override
+    public void onLoad(Potion potion) {
+        ImageView view = new ImageView(potionImage);
+        addEntity(potion, view);
+    }
     
     @Override
     public void onLoad(Portal portal) {
@@ -92,9 +115,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
     @Override
-    public void onLoad(Switch pressure_plate) {
+    public void onLoad(FloorSwitch floorSwitch) {
     	ImageView view = new ImageView(switchImage); 
-    	addEntity(pressure_plate, view); 
+    	addEntity(floorSwitch, view); 
     }
     
   

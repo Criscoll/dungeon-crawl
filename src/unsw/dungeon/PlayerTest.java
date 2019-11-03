@@ -17,11 +17,11 @@ class PlayerTest {
 		this.dungeon = new Dungeon(height, width);
 		player = new Player(dungeon, 0, 0);
 		ItemPickUpHandler o1 = new ItemPickUpHandler(this.dungeon);
-		player.attach(o1);
+		player.attachMovementObserver(o1);
 		doorOpenHandler o2 = new doorOpenHandler(this.dungeon);
-		player.attach(o2);
+		player.attachMovementObserver(o2);
 		boulderPushHandler o3 = new boulderPushHandler(this.dungeon);
-		player.attach(o3);
+		player.attachMovementObserver(o3);
 		dungeon.setPlayer(player);
 	}
 

@@ -21,6 +21,8 @@ public class Dungeon {
     private List<Entity> entities;
     private Player player;
     private List<Entity> floorSwitches;
+    private GoalComponent goal;
+	public boolean levelCompleted;
     
     public Dungeon(int width, int height) {
         this.width = width;
@@ -28,6 +30,8 @@ public class Dungeon {
         this.entities = new ArrayList<>();
         this.floorSwitches = new ArrayList<>();
         this.player = null;
+        goal = null;
+        levelCompleted = false;
     }
     
     
@@ -51,24 +55,6 @@ public class Dungeon {
     	}
     	return null;
     }
-    /**
-     * Searches entities in the dungeon by name and returns each one in an arrayList. If no entities 
-     * found, returns empty list. 
-     * @param name
-     * @return
-     */
-//    public List<Entity> getEntity(String name) {
-//    	List<Entity> entityList = new ArrayList<>(); 
-//    	for (Entity i : this.entities) {
-//    		if (i != null) {
-//    			if (i.getType().equals(name)) 
-//    				entityList.add(i); 
-//    		}
-//    			
-//    	}
-//    	return entityList; 
-//    }
-//    
     
     /**
      * Returns all the entities in the current dungeon. Ensures no null entities are returned in the list. 
@@ -115,6 +101,7 @@ public class Dungeon {
     
     public Entity getEntity(int x, int y) {
     	for(Entity e : entities) {
+    		if(e == null) continue;
     		if(e.getX() == x && e.getY() == y)
     			return e;
     	}
@@ -132,14 +119,27 @@ public class Dungeon {
     		entities.remove(getEntity(x, y));
     	}
     }
-    
-//	public Entity popEntity(int x, int y) {
-//		Entity e = getEntity(x, y);
-//		removeEntity(x, y);
-//		return e;
-//	}
 
 
+	public void setGoal(GoalComponent rootGoal) {
+		this.goal = rootGoal;
+	}
+
+	public GoalComponent getGoal() {
+		return goal;
+	}
+	
+	public boolean canPlayerExit() {
+		return goal.getValue();
+	}
 
 
+	public void setLevelCompleted(boolean value) {
+		this.levelCompleted = true;
+	}
+
+
+	public boolean isLevelCompleted() {
+		return levelCompleted;
+	}
 }

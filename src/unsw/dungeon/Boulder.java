@@ -9,4 +9,5 @@ public class Boulder extends Entity{
 	}
 	
 	
+
 }
