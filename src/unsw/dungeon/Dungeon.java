@@ -113,6 +113,10 @@ public class Dungeon {
         this.player = player;
     }
     
+    public void killPlayer() {
+    	this.player.setDead(true);
+    }
+    
     public Entity getEntity(int x, int y) {
     	for(Entity e : entities) {
     		if(e.getX() == x && e.getY() == y)

@@ -15,6 +15,7 @@ public class Player extends Entity {
 	private ArrayList<AttackObserver> attackObservers; 
 	private boolean invincible; 
 	private boolean sword; 
+	private boolean isDead; 
 //	private String direction;
     /**
      * Create a player positioned in square (x,y)
@@ -29,6 +30,7 @@ public class Player extends Entity {
         attackObservers = new ArrayList<>(); 
         this.invincible = false;
         this.sword = false; 
+        this.isDead = false; 
     }
 
     public void moveUp() {
@@ -151,6 +153,14 @@ public class Player extends Entity {
 	
 	public void setSword(boolean value) {
 		this.sword = value; 
+	}
+	
+	public boolean dead() {
+		return this.isDead; 
+	}
+	
+	public void setDead(boolean value) {
+		this.isDead = true; 
 	}
 
 //	public Key getKey() {
