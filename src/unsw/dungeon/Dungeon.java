@@ -22,7 +22,7 @@ public class Dungeon {
     private Player player;
     private List<Entity> floorSwitches;
     private GoalComponent goal;
-	public boolean levelCompleted;
+	private boolean levelCompleted;
     
     public Dungeon(int width, int height) {
         this.width = width;
