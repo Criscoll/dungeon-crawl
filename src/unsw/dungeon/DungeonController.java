@@ -56,7 +56,36 @@ public class DungeonController {
 
         enemyMoveHandler();
         removeHandler();
-        for(Entity entity : dungeon.getEntities()) {
+        doorOpenHandler();
+        invincibleStateCountDownHandler();
+    }
+
+	private void invincibleStateCountDownHandler() {
+		player.getInvincible().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+//				if the value is set to true
+				if(newValue.booleanValue()) {
+//				start count down
+					Timeline timeline = new Timeline();
+					timeline.setCycleCount(1);
+					KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							player.setInvinicibility(false);
+						}
+					});
+					timeline.getKeyFrames().add(keyFrame);
+					timeline.play();
+				}
+			}
+        	
+        });
+	}
+
+	private void doorOpenHandler() {
+		for(Entity entity : dungeon.getEntities()) {
         	if(entity instanceof Door) {
         		((Door) entity).getStatus().addListener(new ChangeListener<Boolean>() {
 
@@ -70,7 +99,7 @@ public class DungeonController {
         		});
         	}
         }
-    }
+	}
 
 	private void removeHandler() {
 		dungeon.getobservableListEntity().addListener(new ListChangeListener<Entity>() {
@@ -78,10 +107,8 @@ public class DungeonController {
 			public void onChanged(Change<? extends Entity> c) {
 				while(c.next()) {
 					if(c.wasRemoved()) {
-						System.out.println("removed!");
 						for(Entity e : c.getRemoved()) {
 							squares.getChildren().remove(e.getView());
-							
 						}
 					}					
 				}

@@ -2,6 +2,9 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * The player entity
  * @author Robert Clifton-Everest
@@ -13,7 +16,7 @@ public class Player extends Entity {
     private ArrayList<Entity> inventory;
 	private ArrayList<MovementObserver> movementObservers;
 	private ArrayList<AttackObserver> attackObservers; 
-	private boolean invincible; 
+	private BooleanProperty invincible; 
 	private boolean sword; 
 	private boolean isDead; 
 //	private String direction;
@@ -28,7 +31,7 @@ public class Player extends Entity {
         inventory = new ArrayList<>();
         movementObservers = new ArrayList<>();
         attackObservers = new ArrayList<>(); 
-        this.invincible = false;
+        this.invincible = new SimpleBooleanProperty(false);
         this.sword = false; 
         this.isDead = false; 
     }
@@ -139,12 +142,16 @@ public class Player extends Entity {
 		this.y().set(y);
 	}
 
-	public boolean invincible () {
+	public BooleanProperty getInvincible () {
 		return this.invincible; 
 	}
 	
+	public boolean invincible () {
+		return this.invincible.get(); 
+	}
+	
 	public void setInvinicibility(boolean value) {
-		this.invincible = value; 
+		this.invincible.set(value); 
 	}
 	
 	public boolean sword() {
