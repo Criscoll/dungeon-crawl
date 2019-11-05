@@ -104,6 +104,11 @@
       "type": "sword"
     },
     {
+      "x": 10,
+      "y": 3,
+      "type": "exit"
+    },
+    {
       "x": 11,
       "y": 0,
       "type": "wall"
@@ -122,6 +127,11 @@
       "x": 14,
       "y": 0,
       "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 1,
+      "type": "invincibility"
     },
     {
       "x": 15,
@@ -644,15 +654,15 @@
       "type": "wall"
     }
   ],
-  "goal-condition": {
-    "goal": "AND",
-    "subgoals": [
-      {
-        "goal": "enemies"
-      },
-      {
-        "goal": "treasure"
+  "goal-condition": 
+  { "goal": "AND", "subgoals":
+    [ { "goal": "exit" },
+      { "goal": "OR", "subgoals":
+        [ {"goal": "enemies" },
+          {"goal": "treasure" }
+        ]
       }
     ]
   }
+  
 }

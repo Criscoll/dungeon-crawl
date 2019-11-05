@@ -6,6 +6,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -25,7 +27,7 @@ public class Dungeon {
     private Player player;
     private List<Entity> floorSwitches;
     private GoalComponent goal;
-	private boolean levelCompleted;
+	private BooleanProperty levelCompleted;
     
     public Dungeon(int width, int height) {
         this.width = width;
@@ -35,7 +37,7 @@ public class Dungeon {
         this.floorSwitches = new ArrayList<>();
         this.player = null;
         goal = null;
-        levelCompleted = false;
+        levelCompleted = new SimpleBooleanProperty(false);
     }
     
     public ObservableList<Entity> getobservableListEntity(){
@@ -146,11 +148,11 @@ public class Dungeon {
 
 
 	public void setLevelCompleted(boolean value) {
-		this.levelCompleted = true;
+		this.levelCompleted.set(value);
 	}
 
 
 	public boolean isLevelCompleted() {
-		return levelCompleted;
+		return this.levelCompleted.get();
 	}
 }

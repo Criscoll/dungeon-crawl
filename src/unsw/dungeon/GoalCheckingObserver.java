@@ -9,6 +9,7 @@ public class GoalCheckingObserver implements MovementObserver{
 	private boolean switchGoalExist;
 	private boolean treasureGoal;
 	private boolean enemyGoal;
+	private boolean exitGoalExist;
 	
 	public GoalCheckingObserver(Dungeon dungeon) {
 		this.dungeon = dungeon;
@@ -21,6 +22,8 @@ public class GoalCheckingObserver implements MovementObserver{
 			enemyGoalExist = true;
 		if(dungeon.getGoal().isChild("boulders")) 
 			switchGoalExist = true;
+		if(dungeon.getGoal().isChild("exit")) 
+			exitGoalExist = true;
 		
 	}
 	
@@ -67,10 +70,13 @@ public class GoalCheckingObserver implements MovementObserver{
 		}
 		
 //		System.out.println(dungeon.canPlayerExit());
-		if(this.dungeon.getEntity(x, y) instanceof Exit && dungeon.canPlayerExit()) {
+		if(exitGoalExist && this.dungeon.getEntity(x, y) instanceof Exit 
+				&& dungeon.canPlayerExit()) {
 			this.dungeon.setLevelCompleted(true);
-//			System.out.println("Level= " + dungeon.isLevelCompleted());
+		}else if(!exitGoalExist && dungeon.canPlayerExit()) {
+			this.dungeon.setLevelCompleted(true);	
 		}
+//		System.out.println("Level= " + dungeon.isLevelCompleted());
 		
 	}
 
