@@ -15,6 +15,30 @@
      "type": "portal"
     },
     {
+      "x": 5,
+      "y": 4,
+      "id": 1,
+      "type": "door"
+     },
+     {
+      "x": 5,
+      "y": 14,
+      "id": 1,
+      "type": "key"
+     },
+     {
+      "x": 6,
+      "y": 4,
+      "id": 2,
+      "type": "door"
+     },
+     {
+      "x": 5,
+      "y": 5,
+      "id": 2,
+      "type": "key"
+     },
+    {
      "x": 1,
      "y": 8,
      "type": "enemy"

@@ -9,6 +9,7 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -52,18 +53,25 @@ public class DungeonController {
             squares.getChildren().add(entity);
 
         enemyMoveHandler();
-        
-        dungeon.getobservableListEntity().addListener(new ListChangeListener<Entity>() {
+        removeHandler();
+    }
+
+	private void removeHandler() {
+		dungeon.getobservableListEntity().addListener(new ListChangeListener<Entity>() {
 			@Override
 			public void onChanged(Change<? extends Entity> c) {
-				while (c.next()) {
+				while(c.next()) {
 					if(c.wasRemoved()) {
 						System.out.println("removed!");
-					}
+						for(Entity e : c.getRemoved()) {
+							squares.getChildren().remove(e.getView());
+							
+						}
+					}					
 				}
 			}
         });
-    }
+	}
 
 	private void enemyMoveHandler() {
 		EnemyHandler enemyHandler = new EnemyHandler(dungeon);

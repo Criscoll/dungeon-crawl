@@ -132,34 +132,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
     
-
-    
-  
-    
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
-//        trackDoorState(entity, view);
         entities.add(view);
     }
 
-    
-    
-//    private void trackDoorState(Entity entity, Node node) {
-//		if(entity instanceof Door) {
-//	        entity = (Door) entity;
-//	        ImageView view = new ImageView(openDoorImage); 
-//	        GridPane.setColumnIndex(view, entity.getX());
-//	        GridPane.setRowIndex(view, entity.getY());
-//	        
-//	        ((Door) entity).getStatus().addListener(new ChangeListener<Boolean>() {
-//				@Override
-//				public void changed(ObservableValue<? extends Boolean> observable,
-//						Boolean oldValue, Boolean newValue) {
-//					 entities.add(view);
-//				}
-//	        });
-//		}
-//	}
 
 	/**
      * Set a node in a GridPane to have its position track the position of an
