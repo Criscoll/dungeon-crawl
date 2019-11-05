@@ -2,12 +2,14 @@ package unsw.dungeon;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.image.ImageView;
 
 public class Door extends Entity{
 
 	private int id;
 	private BooleanProperty status;
-	
+	private ImageView openDoorView = new ImageView();
+
 	public Door(int x, int y, int id) {
 		super(x, y);
 		this.id = id;
@@ -30,5 +32,13 @@ public class Door extends Entity{
 	public void openDoor() {
 		status.set(true);
 		setObstructsMovement(false);
+	}
+
+	public void setOpenDoorView(ImageView view) {
+		this.openDoorView = view;
+	}
+	
+	public ImageView getOpenDoorView() {
+		return openDoorView;
 	}
 }

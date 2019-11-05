@@ -52,7 +52,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         treasureImage = new Image("/gold_pile.png");
         potionImage = new Image("/brilliant_blue_new.png");
         closedDoorImage = new Image("/closed_door.png");
-        openDoorImage = new Image("/closed_door.png");
+        openDoorImage = new Image("/open_door.png");
 
         
     }
@@ -127,13 +127,16 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     @Override
     public void onLoad(Door door) {
-    	ImageView view = new ImageView(closedDoorImage); 
+    	ImageView view = new ImageView(openDoorImage); 
+    	door.setOpenDoorView(view);
+    	view = new ImageView(closedDoorImage); 
     	addEntity(door, view); 
     }
     
     
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+        entity.setView(view);
         entities.add(view);
     }
 

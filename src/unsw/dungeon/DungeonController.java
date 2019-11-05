@@ -5,6 +5,8 @@ import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -54,6 +56,20 @@ public class DungeonController {
 
         enemyMoveHandler();
         removeHandler();
+        for(Entity entity : dungeon.getEntities()) {
+        	if(entity instanceof Door) {
+        		((Door) entity).getStatus().addListener(new ChangeListener<Boolean>() {
+
+					@Override
+					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
+							Boolean newValue) {
+						squares.getChildren().remove(entity.getView());
+						squares.add(((Door) entity).getOpenDoorView(), entity.getX(), entity.getY());
+					}
+        			
+        		});
+        	}
+        }
     }
 
 	private void removeHandler() {
