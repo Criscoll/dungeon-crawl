@@ -3,11 +3,17 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -45,7 +51,33 @@ public class DungeonController {
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
 
+        enemyMoveHandler();
+        
+        dungeon.getobservableListEntity().addListener(new ListChangeListener<Entity>() {
+			@Override
+			public void onChanged(Change<? extends Entity> c) {
+				while (c.next()) {
+					if(c.wasRemoved()) {
+						System.out.println("removed!");
+					}
+				}
+			}
+        });
     }
+
+	private void enemyMoveHandler() {
+		EnemyHandler enemyHandler = new EnemyHandler(dungeon);
+        Timeline timeline = new Timeline();
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame keyFrame = new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				enemyHandler.update(player.getX(), player.getY(), player);
+			}
+		});
+		timeline.getKeyFrames().add(keyFrame);
+		timeline.play();
+	}
 
     @FXML
     public void handleKeyPress(KeyEvent event) {

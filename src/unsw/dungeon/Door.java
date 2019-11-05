@@ -19,6 +19,10 @@ public class Door extends Entity{
 		return id;
 	}
 	
+	public BooleanProperty getStatus() {
+		return status;
+	}
+
 	public boolean isOpen() {
 		return this.status.get();
 	}

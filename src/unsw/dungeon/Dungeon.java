@@ -6,6 +6,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -28,12 +31,16 @@ public class Dungeon {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
+        this.entities = FXCollections.observableArrayList(entities);
         this.floorSwitches = new ArrayList<>();
         this.player = null;
         goal = null;
         levelCompleted = false;
     }
     
+    public ObservableList<Entity> getobservableListEntity(){
+    	return (ObservableList<Entity>) entities;
+    }
     
     public void addEntity(Entity entity) {
     	if(entity instanceof FloorSwitch) {

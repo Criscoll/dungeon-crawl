@@ -78,7 +78,7 @@ public abstract class DungeonLoader {
         	PortalHandler portalObserver = new PortalHandler(dungeon); 
             doorOpenHandler doorObserver = new doorOpenHandler(dungeon);
             boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
-            EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
+//            EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
             
             SwordHandler swordHandler = new SwordHandler(dungeon); 
             AttackHandler attackHandler = new AttackHandler(dungeon); 
@@ -87,7 +87,7 @@ public abstract class DungeonLoader {
         	player.attachMovementObserver(portalObserver);
             player.attachMovementObserver(doorObserver);
             player.attachMovementObserver(boulderObserver);
-            player.attachMovementObserver(enemyHandler);
+//            player.attachMovementObserver(enemyHandler);
             
             player.attachAttackObserver(attackHandler);
             player.attachAttackObserver(swordHandler);
