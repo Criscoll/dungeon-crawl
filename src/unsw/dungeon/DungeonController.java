@@ -61,24 +61,22 @@ public class DungeonController {
     }
 
 	private void invincibleStateCountDownHandler() {
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(1);
+		KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				player.setInvinicibility(false);
+			}
+		});
+		timeline.getKeyFrames().add(keyFrame);
 		player.getInvincible().addListener(new ChangeListener<Boolean>() {
-
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-//				if the value is set to true
-				if(newValue.booleanValue()) {
-//				start count down
-					Timeline timeline = new Timeline();
-					timeline.setCycleCount(1);
-					KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
-						@Override
-						public void handle(ActionEvent event) {
-							player.setInvinicibility(false);
-						}
-					});
-					timeline.getKeyFrames().add(keyFrame);
-					timeline.play();
-				}
+				// if the value is set to true
+				if(newValue.booleanValue()) timeline.play();
+				// pick another potion while in effect 
+				else timeline.stop();
 			}
         	
         });

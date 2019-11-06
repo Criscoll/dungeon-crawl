@@ -19,7 +19,7 @@ public class Player extends Entity {
 	private BooleanProperty invincible; 
 	private boolean sword; 
 	private boolean isDead; 
-//	private String direction;
+
     /**
      * Create a player positioned in square (x,y)
      * @param x
