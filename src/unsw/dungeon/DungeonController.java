@@ -60,6 +60,13 @@ public class DungeonController {
         invincibleStateCountDownHandler();
     }
 
+    /**
+     * first created a timer, then listen to the BooleanProperty invincible in
+     * the player class, if the value been changing to true start the timer
+     * if the value been set to false stop the timer
+     * because when the Invincibility potion is pick up this value will be set to false and then set to true
+     * so pick up the potion while in the effect of invincibility will restart the timer if the effect is on going 
+     */
 	private void invincibleStateCountDownHandler() {
 		Timeline timeline = new Timeline();
 		timeline.setCycleCount(1);
@@ -73,7 +80,6 @@ public class DungeonController {
 		player.getInvincible().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				// if the value is set to true
 				if(newValue.booleanValue()) timeline.play();
 				// pick another potion while in effect 
 				else timeline.stop();
@@ -81,24 +87,29 @@ public class DungeonController {
         	
         });
 	}
-
+	/**
+	 *  if a door is opened remove the closed door image 
+	 *  and then add the opened door image to the same location		
+	 */
 	private void doorOpenHandler() {
 		for(Entity entity : dungeon.getEntities()) {
         	if(entity instanceof Door) {
         		((Door) entity).getStatus().addListener(new ChangeListener<Boolean>() {
-
-					@Override
+        			@Override
 					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
 							Boolean newValue) {
 						squares.getChildren().remove(entity.getView());
 						squares.add(((Door) entity).getOpenDoorView(), entity.getX(), entity.getY());
 					}
-        			
         		});
         	}
         }
 	}
 
+	/**
+	 * if the entities list in the dungeon class remove a entity,
+	 * then remove that entity from the map too
+	 */
 	private void removeHandler() {
 		dungeon.getobservableListEntity().addListener(new ListChangeListener<Entity>() {
 			@Override
@@ -114,6 +125,9 @@ public class DungeonController {
         });
 	}
 
+	/**
+	 * make enemy move periodically(0.5s/move) 
+	 */
 	private void enemyMoveHandler() {
 		EnemyHandler enemyHandler = new EnemyHandler(dungeon);
         Timeline timeline = new Timeline();
