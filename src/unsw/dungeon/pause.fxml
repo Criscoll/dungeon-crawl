@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="backToGameButton" layoutX="183.0" layoutY="314.0" mnemonicParsing="false" onAction="#handlebackToGameButton" prefHeight="60.0" prefWidth="117.0" text="Back to game">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="backToStartButton" layoutX="183.0" layoutY="397.0" mnemonicParsing="false" onAction="#handlebackToStartButton" prefHeight="60.0" prefWidth="117.0" text="Start menu">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <CheckBox layoutX="189.0" layoutY="99.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="106.0" text="Goal 1" />
+   </children>
+</Pane>

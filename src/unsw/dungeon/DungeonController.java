@@ -34,6 +34,11 @@ public class DungeonController {
 
     private Dungeon dungeon;
 
+    Timeline Potiontimeline;
+    Timeline Enemytimeline;
+    
+    private PauseScreen pauseScreen;
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
@@ -68,21 +73,21 @@ public class DungeonController {
      * so pick up the potion while in the effect of invincibility will restart the timer if the effect is on going 
      */
 	private void invincibleStateCountDownHandler() {
-		Timeline timeline = new Timeline();
-		timeline.setCycleCount(1);
+		Potiontimeline = new Timeline();
+		Potiontimeline.setCycleCount(1);
 		KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				player.setInvinicibility(false);
 			}
 		});
-		timeline.getKeyFrames().add(keyFrame);
+		Potiontimeline.getKeyFrames().add(keyFrame);
 		player.getInvincible().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(newValue.booleanValue()) timeline.play();
+				if(newValue.booleanValue()) Potiontimeline.play();
 				// pick another potion while in effect 
-				else timeline.stop();
+				else Potiontimeline.stop();
 			}
         	
         });
@@ -130,16 +135,16 @@ public class DungeonController {
 	 */
 	private void enemyMoveHandler() {
 		EnemyHandler enemyHandler = new EnemyHandler(dungeon);
-        Timeline timeline = new Timeline();
-		timeline.setCycleCount(Timeline.INDEFINITE);
+		Enemytimeline = new Timeline();
+		Enemytimeline.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame keyFrame = new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				enemyHandler.update(player.getX(), player.getY(), player);
 			}
 		});
-		timeline.getKeyFrames().add(keyFrame);
-		timeline.play();
+		Enemytimeline.getKeyFrames().add(keyFrame);
+		Enemytimeline.play();
 	}
 
     @FXML
@@ -173,11 +178,31 @@ public class DungeonController {
         	player.attackDown();
         	break; 
             
+        case ESCAPE:
+        	stopDungeon(true);
+        	this.pauseScreen.start();
+        	break;
+        	
         default:
             break;
         }
     }
 
+	public void setPauseScreen(PauseScreen pauseScreen) {
+		this.pauseScreen = pauseScreen;
+	}
+
+	// TODO
+	// can be improved
+	public void stopDungeon(boolean value) {
+		if(value) {
+			Enemytimeline.stop();
+			Potiontimeline.stop();
+		}else {
+			Enemytimeline.play();
+			Potiontimeline.play();			
+		}
+	}
 
 }
 
