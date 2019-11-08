@@ -127,11 +127,11 @@ public class Dungeon {
     	return getEntity(x, y).obstructsMovement();
     }
 
-    public void removeEntity(int x, int y) {
-    	if(getEntity(x, y) != null) {
-    		entities.remove(getEntity(x, y));
-    	}
-    }
+//    public void removeEntity(int x, int y) {
+//    	if(getEntity(x, y) != null) {
+//    		entities.remove(getEntity(x, y));
+//    	}
+//    }
 
 
 	public void setGoal(GoalComponent rootGoal) {
@@ -154,5 +154,11 @@ public class Dungeon {
 
 	public boolean isLevelCompleted() {
 		return this.levelCompleted.get();
+	}
+
+	public void removeEntity(Entity entity) {
+		if(entities.contains(entity))
+			entities.remove(entity);
+		
 	}
 }

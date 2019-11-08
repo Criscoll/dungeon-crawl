@@ -26,7 +26,7 @@ public class ItemPickUpHandler implements MovementObserver{
 				player.setInvinicibility(true); // player is now invincible
 			}
 			
-			dungeon.removeEntity(x, y);
+			dungeon.removeEntity(e);
 			player.getInventory().add(e);		
 			
 		}

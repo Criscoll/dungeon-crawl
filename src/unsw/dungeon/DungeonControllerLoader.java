@@ -127,10 +127,17 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     @Override
     public void onLoad(Door door) {
-    	ImageView view = new ImageView(openDoorImage); 
-    	door.setOpenDoorView(view);
-    	view = new ImageView(closedDoorImage); 
-    	addEntity(door, view); 
+    	ImageView openDoorview = new ImageView(openDoorImage); 
+    	addEntity(door, openDoorview); 
+    	ImageView closedDoorview = new ImageView(closedDoorImage); 
+    	addEntity(door, closedDoorview);
+    	door.getStatus().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				closedDoorview.setVisible(false);
+			}	
+    	});
     }
     
     

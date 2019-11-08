@@ -61,7 +61,6 @@ public class DungeonController {
 
         enemyMoveHandler();
         removeHandler();
-        doorOpenHandler();
         invincibleStateCountDownHandler();
     }
 
@@ -92,25 +91,7 @@ public class DungeonController {
         	
         });
 	}
-	/**
-	 *  if a door is opened remove the closed door image 
-	 *  and then add the opened door image to the same location		
-	 */
-	private void doorOpenHandler() {
-		for(Entity entity : dungeon.getEntities()) {
-        	if(entity instanceof Door) {
-        		((Door) entity).getStatus().addListener(new ChangeListener<Boolean>() {
-        			@Override
-					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
-							Boolean newValue) {
-						squares.getChildren().remove(entity.getView());
-						squares.add(((Door) entity).getOpenDoorView(), entity.getX(), entity.getY());
-					}
-        		});
-        	}
-        }
-	}
-
+	
 	/**
 	 * if the entities list in the dungeon class remove a entity,
 	 * then remove that entity from the map too
