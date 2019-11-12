@@ -38,6 +38,8 @@ public class DungeonController {
     Timeline Enemytimeline;
     
     private PauseScreen pauseScreen;
+
+	private GameCompleteScreen completeScreen;
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
@@ -62,6 +64,14 @@ public class DungeonController {
         enemyMoveHandler();
         removeHandler();
         invincibleStateCountDownHandler();
+        dungeon.getLevelCompleted().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(newValue.booleanValue())
+					completeScreen.start();
+			}
+        });
+        
     }
 
     /**
@@ -183,6 +193,10 @@ public class DungeonController {
 			Enemytimeline.play();
 			Potiontimeline.play();			
 		}
+	}
+
+	public void setCompleteScreen(GameCompleteScreen completeScreen) {
+		this.completeScreen = completeScreen;
 	}
 
 }

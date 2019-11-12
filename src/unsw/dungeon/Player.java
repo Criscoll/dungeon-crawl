@@ -167,6 +167,7 @@ public class Player extends Entity {
 	}
 	
 	public void setDead(boolean value) {
+		this.dungeon.setLevelCompleted(true);
 		this.isDead = true; 
 	}
 

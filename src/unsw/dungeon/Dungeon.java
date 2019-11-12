@@ -152,6 +152,10 @@ public class Dungeon {
 	}
 
 
+	public BooleanProperty getLevelCompleted() {
+		return this.levelCompleted;
+	}
+	
 	public boolean isLevelCompleted() {
 		return this.levelCompleted.get();
 	}
