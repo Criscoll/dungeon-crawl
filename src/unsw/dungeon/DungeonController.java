@@ -65,15 +65,20 @@ public class DungeonController {
         enemyMoveHandler();
         removeHandler();
         invincibleStateCountDownHandler();
-        dungeon.getLevelCompleted().addListener(new ChangeListener<Boolean>() {
+        levelCompleteHandler();
+        stopDungeon(true);
+        
+    }
+
+	private void levelCompleteHandler() {
+		dungeon.getLevelCompleted().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(newValue.booleanValue())
 					completeScreen.start();
 			}
         });
-        
-    }
+	}
 
     /**
      * first created a timer, then listen to the BooleanProperty invincible in
@@ -205,7 +210,7 @@ public class DungeonController {
 		DungeonControllerLoader dl = new DungeonControllerLoader("advanced.json");
 		this.initialEntities = dl.getEntities();
 		this.dungeon = dl.load();
-		this.player = dungeon.getPlayer();
+		this.player = dungeon.getPlayer();	
 		initialize();
 	}
 }

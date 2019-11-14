@@ -26,9 +26,11 @@ public class DungeonScreen {
         root.requestFocus();
 	}
 	public void start() {
+		
 		this.stage.setTitle("Dungeon");
 		this.stage.setScene(this.scene);
         this.stage.show();
+        controller.stopDungeon(false);
 	}
 
 	public void resetDungeon() {

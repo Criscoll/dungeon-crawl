@@ -17,7 +17,6 @@ public class PauseController {
 
     @FXML
     void handlebackToGameButton(ActionEvent event) {
-    	dungeonScreen.getController().stopDungeon(false);
     	dungeonScreen.start();
     }
 
