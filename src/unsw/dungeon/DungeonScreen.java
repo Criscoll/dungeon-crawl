@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
@@ -30,6 +31,13 @@ public class DungeonScreen {
         this.stage.show();
 	}
 
+	public void resetDungeon() {
+		try {
+			controller.resetDungeon();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	public DungeonController getController() {
 		return this.controller;
 	}

@@ -187,5 +187,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         return new DungeonController(load(), entities);
     }
 
+	public List<ImageView> getEntities() {
+		return entities;
+	}
+
+     
 
 }

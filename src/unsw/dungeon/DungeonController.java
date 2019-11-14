@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +34,9 @@ public class DungeonController {
     private Player player;
 
     private Dungeon dungeon;
-
-    Timeline Potiontimeline;
-    Timeline Enemytimeline;
+    
+    private Timeline Potiontimeline;
+    private Timeline Enemytimeline;
     
     private PauseScreen pauseScreen;
 
@@ -199,5 +200,13 @@ public class DungeonController {
 		this.completeScreen = completeScreen;
 	}
 
+	public void resetDungeon() throws FileNotFoundException {
+		squares.getChildren().clear();
+		DungeonControllerLoader dl = new DungeonControllerLoader("advanced.json");
+		this.initialEntities = dl.getEntities();
+		this.dungeon = dl.load();
+		this.player = dungeon.getPlayer();
+		initialize();
+	}
 }
 

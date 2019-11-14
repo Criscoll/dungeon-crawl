@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.io.FileNotFoundException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,7 +25,8 @@ public class GameCompleteController {
 
     // TODO not yet implemented the reset
     @FXML
-    void ReplayButtonHandler(ActionEvent event) {
+    void ReplayButtonHandler(ActionEvent event) throws FileNotFoundException {
+    	this.dungeonScreen.resetDungeon();
     	this.dungeonScreen.start();
     }
 

@@ -13,6 +13,8 @@ public class StartController {
 
     @FXML
     void handleStartButton(ActionEvent event) {
+    	
+    	dungeonScreen.resetDungeon();
     	dungeonScreen.start();
     }
 
