@@ -4,33 +4,22 @@ import java.util.List;
 
 public class GoalCheckingObserver implements MovementObserver{
 	private Dungeon dungeon;
-	private boolean treasureGoalExist;
-	private boolean enemyGoalExist;
-	private boolean switchGoalExist;
 	private boolean treasureGoal;
 	private boolean enemyGoal;
-	private boolean exitGoalExist;
 	
 	public GoalCheckingObserver(Dungeon dungeon) {
 		this.dungeon = dungeon;
+		// since the once treasure or enemy is satisfied, it will always stay satisfied
+		// so no need to always check all the conditions 
 		this.treasureGoal = false;
 		this.enemyGoal = false;
-		
-		if(dungeon.getGoal().isChild("treasure")) 
-			treasureGoalExist = true;
-		if(dungeon.getGoal().isChild("enemies")) 
-			enemyGoalExist = true;
-		if(dungeon.getGoal().isChild("boulders")) 
-			switchGoalExist = true;
-		if(dungeon.getGoal().isChild("exit")) 
-			exitGoalExist = true;
 		
 	}
 	
 	@Override
 	public void update(int x, int y, Player player) {
 		//checking all treasures are in player's inventory
-		if(this.treasureGoalExist && !this.treasureGoal) {
+		if(dungeon.getGoal().isTreasureGoal() && !this.treasureGoal) {
 			List<Entity> entities = dungeon.getEntities();
 			boolean tmp = true;
 			for(Entity entity : entities) {
@@ -46,7 +35,7 @@ public class GoalCheckingObserver implements MovementObserver{
 			}
 		}
 		
-		if(this.switchGoalExist) {
+		if(dungeon.getGoal().isBoulderGoal()) {
 			List<Entity> entities = dungeon.getFloorSwitches();
 			boolean tmp = true;
 			for(Entity entity : entities) {
@@ -61,7 +50,7 @@ public class GoalCheckingObserver implements MovementObserver{
 			}
 		}
 		
-		if(this.enemyGoalExist && !this.enemyGoal) {
+		if(dungeon.getGoal().isEnemyGoal() && !this.enemyGoal) {
 			List<Enemy> enemies = this.dungeon.getEnemies();
 			if(enemies.size() == 0) {
 				dungeon.getGoal().setGoalToTrue("enemies");	
@@ -69,15 +58,16 @@ public class GoalCheckingObserver implements MovementObserver{
 			}
 		}
 		
-//		System.out.println(dungeon.canPlayerExit());
-		if(exitGoalExist && this.dungeon.getEntity(x, y) instanceof Exit 
+		//player move to the square that contain exit and ready to exit
+		if(dungeon.getGoal().isExitGoal() && this.dungeon.getEntity(x, y) instanceof Exit 
 				&& dungeon.canPlayerExit()) {
 			this.dungeon.setLevelCompleted(true);
-		}else if(!exitGoalExist && dungeon.canPlayerExit()) {
+		}
+		// if the level don't have goal of exit and player is ready to exit
+		// which mean the level should be completed
+		else if(!dungeon.getGoal().isExitGoal() && dungeon.canPlayerExit()) {
 			this.dungeon.setLevelCompleted(true);	
 		}
-//		System.out.println("Level= " + dungeon.isLevelCompleted());
-		
 	}
 
 }

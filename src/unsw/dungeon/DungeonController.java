@@ -2,7 +2,9 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -212,6 +214,27 @@ public class DungeonController {
 		this.dungeon = dl.load();
 		this.player = dungeon.getPlayer();	
 		initialize();
+	}
+	public Map<String, Boolean> getGoals() {
+		Map<String, Boolean> goals = new HashMap<String, Boolean>();
+		
+		if(dungeon.getGoal().isTreasureGoal()) {
+			goals.put("Truesure", dungeon.getGoal().isTreasureGoalTrue());
+		}
+		if(dungeon.getGoal().isBoulderGoal()) {
+			goals.put("Boulder", dungeon.getGoal().isBoulderGoalTrue());
+		}
+		if(dungeon.getGoal().isEnemyGoal()) {
+			goals.put("Enemy", dungeon.getGoal().isEnemyGoalTrue());
+		}
+		if(dungeon.getGoal().isExitGoal()) {
+			goals.put("Exit", false);
+		}
+		return goals;
+	}
+
+	public String getGoalRelation() {
+		return dungeon.getGoal().toString();
 	}
 }
 

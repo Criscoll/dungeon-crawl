@@ -65,5 +65,76 @@ public class LogicalOperator implements GoalComponent{
 		}	
 	}
 
+	@Override
+	public boolean isBoulderGoal() {
+		return isChild("boulders");
+	}
 
+	@Override
+	public boolean isEnemyGoal() {
+		return isChild("enemies");	
+	}
+
+	@Override
+	public boolean isExitGoal() {
+		return isChild("exit");	
+	}
+
+	@Override
+	public boolean isTreasureGoal() {
+		return isChild("treasure");	
+	}
+
+	@Override
+	public String toString() {
+		String returnString = "Complete";
+		if(this.operator.equals("AND")) {
+			returnString += "\n";
+			for (int i = 0; i < subGoals.size(); i++) {
+				returnString += subGoals.get(i).toString() + "\n";
+				if(i != subGoals.size()-1)
+					returnString += "AND\n";
+			}
+		}
+		else if(this.operator.equals("OR")) {
+			returnString += " one of :\n";
+			for (int i = 0; i < subGoals.size(); i++) {
+				returnString += subGoals.get(i).toString() + "\n";
+			}
+		}
+		return returnString;
+		
+	}
+
+	@Override
+	public boolean isBoulderGoalTrue() {
+		return isGoalTrue("boulders");
+	}
+
+	@Override
+	public boolean isEnemyGoalTrue() {
+		return isGoalTrue("enemies");
+	}
+
+	@Override
+	public boolean isExitGoalTrue() {
+		return isGoalTrue("exit");
+	}
+
+	@Override
+	public boolean isTreasureGoalTrue() {
+		return isGoalTrue("treasure");
+	}
+
+	@Override
+	public boolean isGoalTrue(String name) {
+		boolean returnBoolean = false;
+		for(GoalComponent subgoal : subGoals) {
+			if(subgoal instanceof Goal && subgoal.isGoalTrue(name))
+				returnBoolean = true;
+			else if(subgoal instanceof LogicalOperator && subgoal.isGoalTrue(name))
+				returnBoolean = true;
+		}
+		return returnBoolean;
+	}
 }

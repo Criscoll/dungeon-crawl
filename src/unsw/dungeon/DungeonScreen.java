@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,5 +43,11 @@ public class DungeonScreen {
 	}
 	public DungeonController getController() {
 		return this.controller;
+	}
+	public Map<String, Boolean> getGoals(){
+		return controller.getGoals();
+	}
+	public String getGoalRelation() {
+		return controller.getGoalRelation();
 	}
 }

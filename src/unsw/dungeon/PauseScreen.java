@@ -25,7 +25,8 @@ public class PauseScreen {
 		scene = new Scene(root, 500, 500);	
 	}
 	
-	public void start() {		
+	public void start() {
+		controller.setGoal();
 		stage.setTitle(title);
 		stage.setScene(scene);
 		stage.show();
