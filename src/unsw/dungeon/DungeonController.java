@@ -207,9 +207,9 @@ public class DungeonController {
 		this.completeScreen = completeScreen;
 	}
 
-	public void resetDungeon() throws FileNotFoundException {
+	public void resetDungeon(String filename) throws FileNotFoundException {
 		squares.getChildren().clear();
-		DungeonControllerLoader dl = new DungeonControllerLoader("advanced.json");
+		DungeonControllerLoader dl = new DungeonControllerLoader(filename);
 		this.initialEntities = dl.getEntities();
 		this.dungeon = dl.load();
 		this.player = dungeon.getPlayer();	

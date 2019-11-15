@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
@@ -13,11 +14,17 @@ public class DungeonScreen {
 	private Stage stage;
 	private DungeonController controller;
 	private Scene scene;
+	private ArrayList<String> dungeons = new ArrayList<>();
+	private int currentLevel = 0;
 	
 	public DungeonScreen(Stage primaryStage) throws IOException {
+		dungeons.add("maze.json");
+		dungeons.add("boulders.json");
+		dungeons.add("advanced.json");
+		
 		this.stage = primaryStage;
 		
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(dungeons.get(currentLevel));
         this.controller = dungeonLoader.loadController();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
@@ -36,7 +43,7 @@ public class DungeonScreen {
 
 	public void resetDungeon() {
 		try {
-			controller.resetDungeon();
+			controller.resetDungeon(dungeons.get(currentLevel));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -49,5 +56,14 @@ public class DungeonScreen {
 	}
 	public String getGoalRelation() {
 		return controller.getGoalRelation();
+	}
+	public void nextLevel() {
+		if(currentLevel != dungeons.size()-1)
+			currentLevel++;
+		resetDungeon();
+	}
+	public void playFromStart() {
+		currentLevel = 0;
+		resetDungeon();
 	}
 }

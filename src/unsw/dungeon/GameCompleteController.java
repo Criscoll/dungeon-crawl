@@ -15,6 +15,9 @@ public class GameCompleteController {
     @FXML
     private Button ReplayButton;
 
+    @FXML
+    private Button nextLevelButton;
+    
     private DungeonScreen dungeonScreen;
     private StartScreen startScreen;
     
@@ -23,13 +26,18 @@ public class GameCompleteController {
     	this.startScreen.start();
     }
 
-    // TODO not yet implemented the reset
     @FXML
     void ReplayButtonHandler(ActionEvent event) throws FileNotFoundException {
     	this.dungeonScreen.resetDungeon();
     	this.dungeonScreen.start();
     }
 
+    @FXML
+    void nextLevelHandler(ActionEvent event) {
+    	this.dungeonScreen.nextLevel();
+    	this.dungeonScreen.start();
+    }
+    
     public void setDungeonScreen(DungeonScreen dungeonScreen) {
         this.dungeonScreen = dungeonScreen;
     }

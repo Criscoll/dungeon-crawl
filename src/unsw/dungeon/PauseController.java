@@ -19,11 +19,13 @@ public class PauseController {
     private Button backToStartButton;
     
     @FXML
+    private Button resetLevelButton;
+
+    @FXML
     private GridPane goal;
     
     @FXML
     private Label goalRelation;
-    
     
     private DungeonScreen dungeonScreen;
     private StartScreen startScreen;
@@ -36,6 +38,13 @@ public class PauseController {
     @FXML
     void handlebackToStartButton(ActionEvent event) {
     	startScreen.start();
+    }
+    
+    @FXML
+    void resetLevelHandler(ActionEvent event) {
+    	dungeonScreen.resetDungeon();
+    	dungeonScreen.start();
+    	
     }
     
     public void setDungeonScreen(DungeonScreen dungeonScreen) {
