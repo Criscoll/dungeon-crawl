@@ -18,7 +18,7 @@ public class Player extends Entity {
 	private ArrayList<AttackObserver> attackObservers; 
 	private BooleanProperty invincible; 
 	private boolean sword; 
-	private boolean isDead; 
+	private BooleanProperty isDead; 
 
     /**
      * Create a player positioned in square (x,y)
@@ -33,7 +33,7 @@ public class Player extends Entity {
         attackObservers = new ArrayList<>(); 
         this.invincible = new SimpleBooleanProperty(false);
         this.sword = false; 
-        this.isDead = false; 
+        this.isDead = new SimpleBooleanProperty(false);
     }
 
     public void moveUp() {
@@ -163,12 +163,15 @@ public class Player extends Entity {
 	}
 	
 	public boolean dead() {
+		return this.isDead.get(); 
+	}
+	
+	public BooleanProperty getIsDead() {
 		return this.isDead; 
 	}
 	
 	public void setDead(boolean value) {
-		this.dungeon.setLevelCompleted(true);
-		this.isDead = true; 
+		this.isDead.set(value); 
 	}
 
 }

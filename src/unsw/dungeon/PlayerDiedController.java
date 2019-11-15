@@ -1,23 +1,16 @@
 package unsw.dungeon;
 
-import java.io.FileNotFoundException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-
-public class GameCompleteController {
-
-    @FXML
+public class PlayerDiedController {
+	@FXML
     private Button BackToStartButton;
 
     @FXML
     private Button ReplayButton;
 
-    @FXML
-    private Button nextLevelButton;
-    
     private DungeonScreen dungeonScreen;
     private StartScreen startScreen;
     
@@ -32,12 +25,7 @@ public class GameCompleteController {
     	this.dungeonScreen.start();
     }
 
-    @FXML
-    void nextLevelHandler(ActionEvent event) {
-    	this.dungeonScreen.nextLevel();
-    	this.dungeonScreen.start();
-    }
-    
+
     public void setDungeonScreen(DungeonScreen dungeonScreen) {
         this.dungeonScreen = dungeonScreen;
     }

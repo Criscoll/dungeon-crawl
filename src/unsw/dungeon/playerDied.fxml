@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="BackToStartButton" layoutX="160.0" layoutY="433.0" mnemonicParsing="false" onAction="#BackToStartHandler" prefHeight="42.0" prefWidth="180.0" text="Back to start">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="ReplayButton" layoutX="160.0" layoutY="349.0" mnemonicParsing="false" onAction="#ReplayButtonHandler" text="Replay current level">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="195.0" layoutY="144.0" text="You died">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

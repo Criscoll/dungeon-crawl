@@ -43,6 +43,8 @@ public class DungeonController {
     private PauseScreen pauseScreen;
 
 	private GameCompleteScreen completeScreen;
+
+	private PlayerDiedScreen playerDiedScreen;
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
@@ -68,9 +70,22 @@ public class DungeonController {
         removeHandler();
         invincibleStateCountDownHandler();
         levelCompleteHandler();
+        playerDiedHandler();
+        
+        
         stopDungeon(true);
         
     }
+
+	private void playerDiedHandler() {
+		player.getIsDead().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(newValue.booleanValue())
+					playerDiedScreen.start();	
+			}
+        });
+	}
 
 	private void levelCompleteHandler() {
 		dungeon.getLevelCompleted().addListener(new ChangeListener<Boolean>() {
@@ -235,6 +250,11 @@ public class DungeonController {
 
 	public String getGoalRelation() {
 		return dungeon.getGoal().toString();
+	}
+
+	public void setPlayerDiedScreen(PlayerDiedScreen playerDiedScreen) {
+		this.playerDiedScreen = playerDiedScreen;
+		
 	}
 }
 
