@@ -14,7 +14,7 @@ public class NormalState extends EnemyState {
 		
 		// case 1: already next to eachother
 		
-		if (pX == eX && pY == eY) return; 
+		if (pX == eX && pY == eY) dungeon.killPlayer();
 		
 		// case 2: on the same row
 		if (pY == eY) {

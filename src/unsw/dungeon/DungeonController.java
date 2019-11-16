@@ -74,6 +74,7 @@ public class DungeonController {
         
         
         stopDungeon(true);
+       
         
     }
 
