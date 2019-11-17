@@ -9,12 +9,15 @@ public class InvincibilityState extends EnemyState {
 	public void move(int pX, int pY, Dungeon dungeon) {
 	
 		
+		
 		int eX = this.enemy.getX(); 
 		int eY = this.enemy.getY();
 		
 		// case 1: already next to eachother
 		
-		if (pX == eX && pY == eY) return; 
+		if (pX == eX && pY == eY) this.enemy.killEnemy();
+		
+
 		
 		// case 2: on the same row
 		if (pY == eY) {

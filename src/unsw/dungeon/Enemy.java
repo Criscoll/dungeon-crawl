@@ -29,13 +29,21 @@ public class Enemy extends Entity {
     
     public void changeState(EnemyState state) {
     	this.state = state; 
+    	if (this.state instanceof InvincibilityState) this.setObstructsMovement(false);
+    	else this.setObstructsMovement(true);
     }
+    
+    
     
     /**
      * Reduces the enemy hp by 1. Called when hit by player sword. 
      */
     public void enemyHit() {
     	this.hp -= 1; 
+    }
+    
+    public void killEnemy() {
+    	dungeon.removeEntity(this);
     }
     
     public void moveUp() {
