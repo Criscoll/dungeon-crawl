@@ -15,11 +15,9 @@ public class AttackHandler implements AttackObserver{
 	
 		List<Enemy> enemies = dungeon.getEnemies();
 	
-		
 		for (Enemy enemy : enemies) {
 			if (enemy.getX() == x && enemy.getY() == y) {
 				this.dungeon.removeEntity(enemy); 
-//				this.dungeon.removeEntity(enemy.getX(), enemy.getY()); // remove enemies with 0 hp	
 			}	
 		}
 	}

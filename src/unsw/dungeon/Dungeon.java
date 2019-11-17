@@ -112,6 +112,10 @@ public class Dungeon {
     	this.player.setDead(true);
     }
     
+    public ArrayList<Entity> getPlayerInventory() {
+    	return this.player.getInventory();
+    }
+    
     public Entity getEntity(int x, int y) {
     	for(Entity e : entities) {
     		if(e == null) continue;
@@ -126,12 +130,6 @@ public class Dungeon {
     		return false;
     	return getEntity(x, y).obstructsMovement();
     }
-
-//    public void removeEntity(int x, int y) {
-//    	if(getEntity(x, y) != null) {
-//    		entities.remove(getEntity(x, y));
-//    	}
-//    }
 
 
 	public void setGoal(GoalComponent rootGoal) {

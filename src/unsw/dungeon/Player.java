@@ -17,7 +17,7 @@ public class Player extends Entity {
 	private ArrayList<MovementObserver> movementObservers;
 	private ArrayList<AttackObserver> attackObservers; 
 	private BooleanProperty invincible; 
-	private boolean sword; 
+	private BooleanProperty sword; 
 	private BooleanProperty isDead; 
 
     /**
@@ -154,12 +154,12 @@ public class Player extends Entity {
 		this.invincible.set(value); 
 	}
 	
-	public boolean sword() {
+	public BooleanProperty sword() {
 		return this.sword; 
 	}
 	
 	public void setSword(boolean value) {
-		this.sword = value; 
+		this.sword.set(value);; 
 	}
 	
 	public boolean dead() {

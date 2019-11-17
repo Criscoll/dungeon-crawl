@@ -16,13 +16,14 @@ public class StartScreen {
 	public StartScreen(Stage stage) throws IOException {
 		this.stage=stage;
 		title="Start menu";
+		stage.setResizable(false);
 		
 		controller = new StartController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("start.fxml"));
 		loader.setController(controller);
 		
 		Parent root = loader.load();
-		scene = new Scene(root, 500, 500);	
+		scene = new Scene(root, 605, 400);	
 	}
 	
 	public void start() {
