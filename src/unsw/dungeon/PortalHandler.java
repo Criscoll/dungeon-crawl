@@ -1,6 +1,10 @@
 package unsw.dungeon;
 
+import java.io.File;
 import java.util.List;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class PortalHandler implements MovementObserver {
 	
@@ -25,6 +29,9 @@ public class PortalHandler implements MovementObserver {
 					if (((Portal) entity).getId() == id) { // Set new player coordinates to that of corresponding portal
 						player.setX(entity.getX());
 						player.setY(entity.getY());
+						Media sound = new Media(new File("sounds/portal.mp3").toURI().toString());
+						MediaPlayer mediaPlayer = new MediaPlayer(sound);
+						mediaPlayer.play();
 						break;
 					}
 				}

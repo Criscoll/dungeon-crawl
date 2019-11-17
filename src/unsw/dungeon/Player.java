@@ -19,10 +19,13 @@ public class Player extends Entity {
 	private BooleanProperty invincible; 
 
 	private BooleanProperty sword; 
+	private BooleanProperty wand;
+
+	private boolean hasWeapon; 
 	private BooleanProperty isDead; 
 	
+	
 	private Entity weapon; 
-	private boolean hasWeapon;
 
     /**
      * Create a player positioned in square (x,y)
@@ -37,9 +40,10 @@ public class Player extends Entity {
         attackObservers = new ArrayList<>(); 
         this.invincible = new SimpleBooleanProperty(false);
         this.sword = new SimpleBooleanProperty(false); 
+        this.wand = new SimpleBooleanProperty(false); 
 
         this.weapon = null; 
-        this.hasWeapon = false;
+        this.hasWeapon = false; 
 
         this.isDead = new SimpleBooleanProperty(false);
     }
@@ -170,12 +174,20 @@ public class Player extends Entity {
 		this.sword.set(value);
 	}
 	
-	public boolean hasWeapon() {
-		return this.hasWeapon;
+	public BooleanProperty wand() {
+		return this.wand;
+	}
+	
+	public void setWand(boolean value) {
+		this.wand.set(value); 
 	}
 	
 	public void setHasWeapon(boolean value) {
-		this.hasWeapon = value;
+		this.hasWeapon = value; 
+	}
+	
+	public boolean hasWeapon() {
+		return this.hasWeapon; 
 	}
 	
 	public Entity getWeapon() {

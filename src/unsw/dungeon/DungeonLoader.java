@@ -80,7 +80,8 @@ public abstract class DungeonLoader {
             boulderPushHandler boulderObserver = new boulderPushHandler(dungeon);
 //            EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
             
-            SwordHandler swordHandler = new SwordHandler(dungeon); 
+
+            WeaponHandler weaponHandler = new WeaponHandler(dungeon); 
             AttackHandler attackHandler = new AttackHandler(dungeon); 
             
             player.attachMovementObserver(itemObserver);
@@ -90,7 +91,7 @@ public abstract class DungeonLoader {
 //            player.attachMovementObserver(enemyHandler);
             
             player.attachAttackObserver(attackHandler);
-            player.attachAttackObserver(swordHandler);
+            player.attachAttackObserver(weaponHandler);
               
             dungeon.setPlayer(player);
             onLoad(player);
