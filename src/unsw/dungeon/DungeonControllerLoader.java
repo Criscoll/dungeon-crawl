@@ -35,7 +35,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image potionImage; 
     private Image closedDoorImage; 
     private Image openDoorImage; 
-    private Image playerSwordImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -54,29 +53,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         potionImage = new Image("/brilliant_blue_new.png");
         closedDoorImage = new Image("/closed_door.png");
         openDoorImage = new Image("/open_door.png");
-        playerSwordImage = new Image("/human_sword.png");
-
 
         
     }
 
     @Override
-    public void onLoad(Player player) {
-    	
-   
-    	
-    	ImageView playerView = new ImageView(playerImage); 
-    	addEntity(player, playerView); 
-    	
-    	ImageView playerSwordView = new ImageView(playerSwordImage); 
-    	addEntity(player, playerSwordView);
-    	player.sword().addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				closedDoorview.setVisible(false);
-			}	
-    	});
+    public void onLoad(Entity player) {
         ImageView view = new ImageView(playerImage);
         addEntity(player, view);
     }
@@ -150,7 +132,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     	ImageView closedDoorview = new ImageView(closedDoorImage); 
     	addEntity(door, closedDoorview);
     	door.getStatus().addListener(new ChangeListener<Boolean>() {
-    	
+
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				closedDoorview.setVisible(false);
@@ -167,6 +149,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 
 	/**
+	 * 
      * Set a node in a GridPane to have its position track the position of an
      * entity in the dungeon.
      *
@@ -176,7 +159,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param entity
      * @param node
      */
-    private void trackPosition(Entity entity, Node node) {
+    public static void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
         entity.x().addListener(new ChangeListener<Number>() {

@@ -32,7 +32,7 @@ public class Player extends Entity {
         movementObservers = new ArrayList<>();
         attackObservers = new ArrayList<>(); 
         this.invincible = new SimpleBooleanProperty(false);
-        this.sword = false; 
+        this.sword = new SimpleBooleanProperty(false); 
         this.isDead = new SimpleBooleanProperty(false);
     }
 
@@ -66,22 +66,22 @@ public class Player extends Entity {
     
     
     public void attackUp() {
-    	if (!this.sword) return; 
+    	if (!this.sword.get()) return; 
     	notifyAttackObservers(getX(), getY() - 1);
     }
 
     public void attackDown() {
-    	if (!this.sword) return; 
+    	if (!this.sword.get()) return; 
     	notifyAttackObservers(getX(), getY() + 1);
     }
 
     public void attackLeft() {
-    	if (!this.sword) return; 
+    	if (!this.sword.get()) return; 
     	notifyAttackObservers(getX() - 1, getY());
     }
 
     public void attackRight() {
-    	if (!this.sword) return; 
+    	if (!this.sword.get()) return; 
     	notifyAttackObservers(getX() + 1, getY());
     }    
     /**

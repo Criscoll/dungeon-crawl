@@ -71,6 +71,7 @@ public class DungeonController {
         invincibleStateCountDownHandler();
         levelCompleteHandler();
         playerDiedHandler();
+        changePlayerHoldSword(); 
         
         
         stopDungeon(true);
@@ -78,6 +79,35 @@ public class DungeonController {
         
     }
 
+    private void changePlayerHoldSword() {
+		player.sword().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue.booleanValue()) {
+					squares.getChildren().remove(player.getView());
+					Image playerHoldSwordImage = new Image("/human_sword.png");
+					ImageView view = new ImageView(playerHoldSwordImage);
+					view.setFitHeight(32);
+					view.setFitWidth(32);
+					DungeonControllerLoader.trackPosition(player, view);
+					player.setView(view);
+					squares.getChildren().add(view);
+				} else {
+					squares.getChildren().remove(player.getView());
+					Image playerImage = new Image("/human_new.png");
+					ImageView view = new ImageView(playerImage);
+					view.setFitHeight(32);
+					view.setFitWidth(32);
+					DungeonControllerLoader.trackPosition(player, view);
+					player.setView(view);
+					squares.getChildren().add(view);
+				}
+					
+			}
+        });
+	}
+    
+    
 	private void playerDiedHandler() {
 		player.getIsDead().addListener(new ChangeListener<Boolean>() {
 			@Override
