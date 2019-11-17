@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 /**
@@ -144,13 +147,24 @@ public class DungeonController {
 				player.setInvinicibility(false);
 			}
 		});
+		Media potionActive = new Media(new File("sounds/potion_up.mp3").toURI().toString());
+		Media potionInactive = new Media(new File("sounds/potion_down.mp3").toURI().toString());
+		MediaPlayer active = new MediaPlayer(potionActive);
+		MediaPlayer inactive = new MediaPlayer(potionInactive);
+
 		Potiontimeline.getKeyFrames().add(keyFrame);
 		player.getInvincible().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(newValue.booleanValue()) Potiontimeline.play();
+				if(newValue.booleanValue()) {
+					Potiontimeline.play();
+					active.play();
+				}
 				// pick another potion while in effect 
-				else Potiontimeline.stop();
+				else {
+					Potiontimeline.stop();
+					inactive.play();
+				}
 			}
         	
         });

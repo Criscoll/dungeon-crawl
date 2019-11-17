@@ -35,7 +35,7 @@ public class ItemPickUpHandler implements MovementObserver{
 			if (e instanceof Potion) {
 				player.setInvinicibility(false); // if the player is already invincible then the cooldown timer should reset
 				player.setInvinicibility(true); // player is now invincible
-				
+
 				
 			}
 			

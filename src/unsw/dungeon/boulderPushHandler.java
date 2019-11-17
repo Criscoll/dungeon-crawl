@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+import java.io.File;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 public class boulderPushHandler implements MovementObserver{
 
 	private Dungeon dungeon;
@@ -13,7 +18,8 @@ public class boulderPushHandler implements MovementObserver{
 		if(e == null) return;
 		// player tried to move to the location of the boulder
 		if(e instanceof Boulder) {
-				
+			Media sound = new Media(new File("sounds/boulder_push.mp3").toURI().toString());
+			MediaPlayer boulderSound = new MediaPlayer(sound);
 			//boulder above the player
 			if(x == player.getX() && y == player.getY()-1) {
 				// only push the boulder when there is no entity in the square
@@ -31,6 +37,10 @@ public class boulderPushHandler implements MovementObserver{
 					}
 					
 					e.y().set(e.getY()-1);
+					boulderSound.play();
+
+
+					
 				}
 			}
 			//boulder below the player
@@ -48,6 +58,8 @@ public class boulderPushHandler implements MovementObserver{
 					}
 					
 					e.y().set(e.getY()+1);
+					boulderSound.play();
+
 				}
 			}
 				
@@ -66,6 +78,8 @@ public class boulderPushHandler implements MovementObserver{
 					}
 					
 					e.x().set(e.getX()-1);
+					boulderSound.play();
+
 				}
 			}
 			
@@ -84,6 +98,8 @@ public class boulderPushHandler implements MovementObserver{
 						fs.setActive(true);
 					}
 					e.x().set(e.getX()+1);
+					boulderSound.play();
+
 				}
 			}
 		}
