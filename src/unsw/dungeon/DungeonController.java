@@ -42,6 +42,7 @@ public class DungeonController {
     
     private Timeline Potiontimeline;
     private Timeline Enemytimeline;
+    private Timeline HoundTimeline;
     
     private PauseScreen pauseScreen;
 
@@ -206,8 +207,21 @@ public class DungeonController {
 				enemyHandler.update(player.getX(), player.getY(), player);
 			}
 		});
+		
+		
+		HoundHandler houndHandler = new HoundHandler(dungeon);
+		HoundTimeline = new Timeline();
+		HoundTimeline.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame HouldKeyFrame = new KeyFrame(Duration.millis(250), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				houndHandler.update(player.getX(), player.getY(), player);
+			}
+		});
+		
 		Enemytimeline.getKeyFrames().add(keyFrame);
-		Enemytimeline.play();
+		HoundTimeline.getKeyFrames().add(HouldKeyFrame);
+//		Enemytimeline.play();
 	}
 
     @FXML
@@ -261,9 +275,11 @@ public class DungeonController {
 		if(value) {
 			Enemytimeline.stop();
 			Potiontimeline.stop();
+			HoundTimeline.stop();
 		}else {
 			Enemytimeline.play();
-			Potiontimeline.play();			
+			Potiontimeline.play();
+			HoundTimeline.play();
 		}
 	}
 

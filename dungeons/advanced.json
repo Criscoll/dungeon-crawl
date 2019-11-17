@@ -43,6 +43,11 @@
      "type": "enemy"
     },
     {
+     "x": 2,
+     "y": 8,
+     "type": "hound"
+    },
+    {
      "x": 1,
      "y": 7,
      "type": "boulder"

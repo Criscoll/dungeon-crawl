@@ -172,6 +172,12 @@ public abstract class DungeonLoader {
 	    	onLoad(wand);
 	    	entity = wand;
 	    	break;
+	    	
+	    case "hound":
+	    	Hound hound = new Hound(dungeon, x, y);
+	    	onLoad(hound);
+	    	entity = hound;
+	    	break; 	
 	    }
         dungeon.addEntity(entity);
     }
@@ -204,6 +210,6 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Wand wand); 
 
-    
+    public abstract void onLoad(Hound hound); 
     
 }

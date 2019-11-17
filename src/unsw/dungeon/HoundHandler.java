@@ -2,11 +2,11 @@ package unsw.dungeon;
 
 import java.util.List;
 
-public class EnemyHandler implements MovementObserver {
+public class HoundHandler implements MovementObserver {
 	
 	private Dungeon dungeon;
 	
-	public EnemyHandler(Dungeon dungeon) {
+	public HoundHandler(Dungeon dungeon) {
 		this.dungeon = dungeon;
 	}
 
@@ -14,9 +14,9 @@ public class EnemyHandler implements MovementObserver {
 	public void update(int x, int y, Player player) {
 		List<Enemy> enemies = dungeon.getEnemies();
 
-		
+			
 		for (Enemy enemy : enemies) {
-			if(enemy instanceof Hound) continue;
+			if (!(enemy instanceof Hound)) continue;
 			if (player.invincible()) enemy.changeState(new InvincibilityState(enemy));
 			else enemy.changeState(new NormalState(enemy));
 			
