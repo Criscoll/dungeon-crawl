@@ -12,13 +12,15 @@ import javafx.beans.property.SimpleBooleanProperty;
  */
 public class Player extends Entity {
 
-    private Dungeon dungeon;
+	private Dungeon dungeon;
     private ArrayList<Entity> inventory;
 	private ArrayList<MovementObserver> movementObservers;
 	private ArrayList<AttackObserver> attackObservers; 
 	private BooleanProperty invincible; 
-	private boolean sword; 
-	private BooleanProperty isDead; 
+//	private boolean sword; 
+	private BooleanProperty isDead;
+	private Entity weapon; 
+	private boolean hasWeapon;
 
     /**
      * Create a player positioned in square (x,y)
@@ -32,7 +34,8 @@ public class Player extends Entity {
         movementObservers = new ArrayList<>();
         attackObservers = new ArrayList<>(); 
         this.invincible = new SimpleBooleanProperty(false);
-        this.sword = false; 
+        this.weapon = null; 
+        this.hasWeapon = false;
         this.isDead = new SimpleBooleanProperty(false);
     }
 
@@ -66,22 +69,22 @@ public class Player extends Entity {
     
     
     public void attackUp() {
-    	if (!this.sword) return; 
+    	if (!this.hasWeapon()) return; 
     	notifyAttackObservers(getX(), getY() - 1);
     }
 
     public void attackDown() {
-    	if (!this.sword) return; 
+    	if (!this.hasWeapon()) return; 
     	notifyAttackObservers(getX(), getY() + 1);
     }
 
     public void attackLeft() {
-    	if (!this.sword) return; 
+    	if (!this.hasWeapon()) return; 
     	notifyAttackObservers(getX() - 1, getY());
     }
 
     public void attackRight() {
-    	if (!this.sword) return; 
+    	if (!this.hasWeapon()) return; 
     	notifyAttackObservers(getX() + 1, getY());
     }    
     /**
@@ -110,7 +113,7 @@ public class Player extends Entity {
 	 */
 	public void notifyAttackObservers(int x, int y) {
 		for (AttackObserver o : attackObservers) {
-			o.update(x, y);
+			o.update(x, y, this);
 		}
 	}
 	
@@ -154,12 +157,26 @@ public class Player extends Entity {
 		this.invincible.set(value); 
 	}
 	
-	public boolean sword() {
-		return this.sword; 
+	public boolean hasWeapon() {
+		return this.hasWeapon;
 	}
 	
-	public void setSword(boolean value) {
-		this.sword = value; 
+	public void setHasWeapon(boolean value) {
+		this.hasWeapon = value;
+	}
+	
+	public Entity getWeapon() {
+		return this.weapon;
+	}
+
+	public void setWeapon(Entity entity) {
+		this.weapon = entity;
+		this.setHasWeapon(true);
+	}
+	
+	public void removeWeapon() {
+		this.weapon = null;
+		this.setHasWeapon(false);
 	}
 	
 	public boolean dead() {

@@ -33,7 +33,6 @@ public class Entity {
 		return view;
 	}
 
-
 	public void setView(ImageView view) {
 		this.view = view;
 	}

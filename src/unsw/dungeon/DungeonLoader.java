@@ -164,7 +164,13 @@ public abstract class DungeonLoader {
 	    	Door door = new Door(x, y, id); 
 	    	onLoad(door); 
 	    	entity = door; 
-	    	break; 
+	    	break;
+	    	
+	    case "wand":
+	    	Wand wand = new Wand(x, y);
+	    	onLoad(wand);
+	    	entity = wand;
+	    	break;
 	    }
         dungeon.addEntity(entity);
     }
@@ -192,11 +198,11 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Boulder boulder);
     
     public abstract void onLoad(FloorSwitch boulder); 
-
-    
+  
     public abstract void onLoad(Door door); 
 
-    
+    public abstract void onLoad(Wand wand); 
+
     
     
 }

@@ -67,7 +67,7 @@ public class DungeonController {
             squares.getChildren().add(entity);
 
         enemyMoveHandler();
-        removeHandler();
+        entitiesListObserver();
         invincibleStateCountDownHandler();
         levelCompleteHandler();
         playerDiedHandler();
@@ -130,7 +130,7 @@ public class DungeonController {
 	 * if the entities list in the dungeon class remove a entity,
 	 * then remove that entity from the map too
 	 */
-	private void removeHandler() {
+	private void entitiesListObserver() {
 		dungeon.getobservableListEntity().addListener(new ListChangeListener<Entity>() {
 			@Override
 			public void onChanged(Change<? extends Entity> c) {
@@ -139,7 +139,11 @@ public class DungeonController {
 						for(Entity e : c.getRemoved()) {
 							squares.getChildren().remove(e.getView());
 						}
-					}					
+					}
+					else if(c.wasAdded()) {
+						Entity addedEntity = c.getAddedSubList().get(c.getAddedSubList().size() - 1);
+						squares.getChildren().add(addedEntity.getView());
+					}
 				}
 			}
         });

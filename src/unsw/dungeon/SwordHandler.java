@@ -10,7 +10,7 @@ public class SwordHandler implements AttackObserver {
 	}
 	
 	
-	public void update (int x, int y) {
+	public void update (int x, int y, Player player) {
 		
 	}
 
