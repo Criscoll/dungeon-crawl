@@ -25,11 +25,11 @@ class GoalTest {
 		EnemyHandler enemyHandler = new EnemyHandler(dungeon); 
 		player.attachMovementObserver(enemyHandler);
 		
-		player.setSword(true);
+		player.setHasWeapon(true);
 		
+		dungeon.setPlayer(player);
 		AttackHandler attackHandler = new AttackHandler(dungeon); 
 		player.attachAttackObserver(attackHandler);
-		dungeon.setPlayer(player);
 		
 	}
 
@@ -213,6 +213,7 @@ class GoalTest {
 		assertTrue(dungeon.getEntity(1, 0) instanceof Enemy);  
 		assertTrue(dungeon.getEntity(1, 0) != null);  
 		
+		player.setWeapon(new Sword(1, 1));
 		player.attackRight();
 		assertTrue(dungeon.getEntity(1, 0) == null);
 		

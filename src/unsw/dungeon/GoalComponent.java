@@ -16,4 +16,8 @@ public interface GoalComponent {
 	public boolean isEnemyGoalTrue();
 	public boolean isExitGoalTrue();
 	public boolean isTreasureGoalTrue(); 
+	public void setTreasureGoal(boolean value);
+	public void setBoulderGoal(boolean value);
+	public void setEnemyGoal(boolean value);
+	
 }

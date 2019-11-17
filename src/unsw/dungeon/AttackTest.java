@@ -17,7 +17,7 @@ class AttackTest {
 	void setUp() throws Exception {
 		this.dungeon = new Dungeon(height, width);
 		player = new Player(dungeon, 5, 5);
-		player.setSword(true);
+		player.setHasWeapon(true);
 		
 		AttackHandler attackHandler = new AttackHandler(dungeon); 
 		player.attachAttackObserver(attackHandler);
@@ -102,7 +102,7 @@ class AttackTest {
 	@Test
 	public void testNoSwordAttack() {
 		
-		this.player.setSword(false);
+		this.player.setHasWeapon(false);
 		
 		// attack right
 		Enemy enemy = new Enemy(dungeon, 6, 5);
@@ -159,7 +159,7 @@ class AttackTest {
 		assertTrue(dungeon.getEntity(5, 6) != null); 
 		
 		
-		this.player.setSword(true);
+		this.player.setHasWeapon(true);
 
 		
 	}

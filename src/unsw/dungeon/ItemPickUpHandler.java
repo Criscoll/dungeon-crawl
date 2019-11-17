@@ -22,21 +22,17 @@ public class ItemPickUpHandler implements MovementObserver{
 			for(Entity entity : player.getInventory()) {
 				if(e instanceof Key && entity instanceof Key)
 					return;
-				if(e instanceof Sword && entity instanceof Sword)
-					return;
 			}
-			if (e instanceof Sword) {
-				player.setSword(true); // player now has a sword
-				Media sound = new Media(new File("sounds/sword_draw.mp3").toURI().toString());
-				MediaPlayer mediaPlayer = new MediaPlayer(sound);
-				mediaPlayer.play();
-				
-			}
+
+			if((e instanceof Sword || e instanceof Wand) && player.hasWeapon())
+				return;
+			if (e instanceof Sword || e instanceof Wand) player.setWeapon(e); // player now has a weapon
+
 			if (e instanceof Potion) {
 				player.setInvinicibility(false); // if the player is already invincible then the cooldown timer should reset
 				player.setInvinicibility(true); // player is now invincible
 
-				
+		
 			}
 			
 			if (e instanceof Treasure || e instanceof Key) {

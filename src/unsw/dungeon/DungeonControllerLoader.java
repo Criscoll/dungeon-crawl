@@ -38,6 +38,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image potionImage; 
     private Image closedDoorImage; 
     private Image openDoorImage; 
+    private Image wandImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -56,7 +57,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         potionImage = new Image("/brilliant_blue_new.png");
         closedDoorImage = new Image("/closed_door.png");
         openDoorImage = new Image("/open_door.png");
-
+        wandImage = new Image("/wand.png");
         
     }
 
@@ -146,6 +147,13 @@ public class DungeonControllerLoader extends DungeonLoader {
     	});
     }
     
+    @Override
+	public void onLoad(Wand wand) {
+    	ImageView view = new ImageView(wandImage); 
+    	view.setFitHeight(32);
+		view.setFitWidth(32);
+    	addEntity(wand, view); 	
+	}
     
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);

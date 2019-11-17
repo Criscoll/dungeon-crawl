@@ -137,4 +137,28 @@ public class LogicalOperator implements GoalComponent{
 		}
 		return returnBoolean;
 	}
+
+	@Override
+	public void setTreasureGoal(boolean value) {
+		if(value)
+			setGoalToTrue("treasure");
+		else
+			setGoalToFalse("treasure");
+	}
+
+	@Override
+	public void setBoulderGoal(boolean value) {
+		if(value)
+			setGoalToTrue("boulders");
+		else
+			setGoalToFalse("boulders");
+	}
+	
+	@Override
+	public void setEnemyGoal(boolean value) {
+		if(value)
+			setGoalToTrue("enemies");
+		else
+			setGoalToFalse("enemies");	
+	}
 }
