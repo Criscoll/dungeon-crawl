@@ -28,7 +28,7 @@ public class GoalCheckingObserver implements MovementObserver{
 				}
 			}
 			if(tmp) {
-				dungeon.getGoal().setGoalToTrue("treasure");
+				dungeon.getGoal().setTreasureGoal(true);
 				// since the once the treasure goal is true it would always be true
 				// so no need to check this value again
 				this.treasureGoal = true;
@@ -44,16 +44,16 @@ public class GoalCheckingObserver implements MovementObserver{
 				}
 			}
 			if(tmp) {
-				dungeon.getGoal().setGoalToTrue("boulders");
+				dungeon.getGoal().setBoulderGoal(true);
 			}else {
-				dungeon.getGoal().setGoalToFalse("boulders");
+				dungeon.getGoal().setBoulderGoal(false);
 			}
 		}
 		
 		if(dungeon.getGoal().isEnemyGoal() && !this.enemyGoal) {
 			List<Enemy> enemies = this.dungeon.getEnemies();
 			if(enemies.size() == 0) {
-				dungeon.getGoal().setGoalToTrue("enemies");	
+				dungeon.getGoal().setEnemyGoal(true);
 				this.enemyGoal = true;
 			}
 		}
