@@ -1,10 +1,10 @@
 # Project
 
-You have received a request from a client for an application for the playing of dungeon-style puzzles. With a partner from your lab class, you will follow an agile development process to design and implement a desktop Java application that satisfies the requirements of the client (see below). The final piece of software you deliver is expected to be of professional quality, user-friendly, and demonstrate the knowledge and skills you have acquired in this course.
+A dungeon style puzzle game developed for the UNSW course COMP2511 (Object Oriented Design & Programming). My partner and I were tasked with developing this project using an agile methodology.
 
 ### Dungeon layout
 
-To be specific, the layout of each dungeon is defined by a grid of squares, each of which may contain one or more entities. The different types of entities are as follows:
+The layout of each dungeon is defined by a grid of squares, each of which may contain one or more entities. The different types of entities are as follows:
 
 | Entity               | Example                                 | Description                                                                                                                                                                                                                                                                   |
 | -------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
